@@ -1,5 +1,5 @@
 #include <string>
 
-bool is_valid_input(std::string input) {
+bool isValidInput(std::string input) {
 	return true;
 }
