@@ -26,6 +26,53 @@ TEST_F(FixtureTestCalculator, SuccessToAdd) {
 	EXPECT_EQ("Mock is working", result);
 }
 
+TEST(InputValidation, TypeValidation) {
+	EXPECT_EQ(true, isValidBirthday("20120101"));
+	EXPECT_EQ(true, isValidBirthday("19990228"));
+	EXPECT_EQ(true, isValidBirthday("20101231"));
+	EXPECT_EQ(false, isValidBirthday("20010229"));
+	EXPECT_EQ(false, isValidBirthday("199902282"));
+	EXPECT_EQ(false, isValidBirthday("201012A1"));
+
+
+	EXPECT_EQ(true, isValidCerti("ADV"));
+	EXPECT_EQ(true, isValidCerti("PRO"));
+	EXPECT_EQ(true, isValidCerti("EX"));
+	EXPECT_EQ(false, isValidCerti("ADVance"));
+
+	EXPECT_EQ(true, isValidCL("CL1"));
+	EXPECT_EQ(true, isValidCL("CL2"));
+	EXPECT_EQ(true, isValidCL("CL3"));
+	EXPECT_EQ(true, isValidCL("CL4"));
+	EXPECT_EQ(false, isValidCL("CL0"));
+	EXPECT_EQ(false, isValidCL("CL5"));
+	EXPECT_EQ(false, isValidCL("CL2 "));
+	EXPECT_EQ(false, isValidCL("CL22"));
+
+	EXPECT_EQ(true, isValidPhoneNum("010-1234-3210"));
+	EXPECT_EQ(true, isValidPhoneNum("010-9999-0000"));
+	EXPECT_EQ(false, isValidPhoneNum("011-1234-3210"));
+	EXPECT_EQ(false, isValidPhoneNum("012-1234-3210"));
+	EXPECT_EQ(false, isValidPhoneNum("010-1998-32210"));
+	EXPECT_EQ(false, isValidPhoneNum("010-123-43210"));
+	EXPECT_EQ(false, isValidPhoneNum("010--23143210"));
+
+	EXPECT_EQ(true, isValidEmployeeNum("69123456"));
+	EXPECT_EQ(true, isValidEmployeeNum("21123456"));
+	EXPECT_EQ(false, isValidEmployeeNum("69123a56"));
+	EXPECT_EQ(false, isValidEmployeeNum("691023456"));
+	EXPECT_EQ(false, isValidEmployeeNum("68123456"));
+	EXPECT_EQ(false, isValidEmployeeNum("22123456"));
+	EXPECT_EQ(false, isValidEmployeeNum("2112345a"));
+
+	EXPECT_EQ(true, isValidName("A B"));
+	EXPECT_EQ(true, isValidName("AMILY BARK"));
+	EXPECT_EQ(true, isValidName("ABCDEFG BILLYAB"));
+	EXPECT_EQ(false, isValidName("ABCDEFG BILL YAB"));
+	EXPECT_EQ(false, isValidName("Amily Bark"));
+	EXPECT_EQ(false, isValidName("Am1ly Bark"));
+}
+
 TEST(InputValidation, AddInputValidation) {
 	
 	EXPECT_EQ(true, is_valid_input("ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO"));
