@@ -27,6 +27,7 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	/*
 	ofstream outputFile;
 	outputFile.open("output.txt");
 
@@ -36,6 +37,7 @@ int main(int argc, char** argv) {
 		outputFile << "This is C++ File Contents.\n";
 		outputFile.close();
 	}
+	*/
 
 	return 0;
 }

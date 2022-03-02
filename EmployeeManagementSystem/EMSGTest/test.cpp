@@ -2,6 +2,7 @@
 #include "test.h"
 #include "TestUtil.h"
 #include "../EmployeeManagementSystem/input_validation.cpp"
+#include "../EmployeeManagementSystem/outputValidation.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -85,6 +86,10 @@ TEST(InputValidation, DelInputValidation) {
 	EXPECT_EQ(false, is_valid_input("DEL, ,-l, ,cl,CL3"));
 	EXPECT_EQ(false, is_valid_input("DEL, , , ,phoneNum,010-1234-"));
 	EXPECT_EQ(false, is_valid_input("DEL, ,-y, ,birthday,01"));
+}
+
+TEST(OutputValidation, IsSameAsAnswer) {
+	EXPECT_EQ(true, IsValidOutput());
 }
 
 TEST(TestCaseName, TestName) {
