@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
+bool readInputFile() {
 	ifstream inputFile;
 	inputFile.open("input.txt");
 
@@ -13,10 +13,29 @@ int main(int argc, char** argv) {
 		while (getline(inputFile, str)) {
 			cout << str << endl;
 		}
-
+	}
+	else {
+		return false;
 	}
 
 	inputFile.close();
+	return true;
+}
+
+int main(int argc, char** argv) {
+	if (!readInputFile()) {
+		return -1;
+	}
+
+	ofstream outputFile;
+	outputFile.open("output.txt");
+
+	if (outputFile.is_open()) {
+		// for test
+		outputFile << "Hello World!\n";
+		outputFile << "This is C++ File Contents.\n";
+		outputFile.close();
+	}
 
 	return 0;
 }
