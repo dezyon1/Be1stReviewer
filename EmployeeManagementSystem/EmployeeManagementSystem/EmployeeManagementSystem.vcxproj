@@ -146,6 +146,10 @@
     <ClInclude Include="employee.h" />
     <ClInclude Include="input_validation.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="output_solution.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
