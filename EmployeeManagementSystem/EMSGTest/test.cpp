@@ -1,5 +1,30 @@
 #include "pch.h"
+#include "test.h"
+#include "TestUtil.h"
 #include "../EmployeeManagementSystem/input_validation.cpp"
+
+using ::testing::_;
+using ::testing::AtLeast;
+using ::testing::Return;
+
+TEST_F(FixtureTestCalculator, SuccessToAdd) {
+	FEATURE("Manage는 Employee에 사원 정보를 추가할 수 있다.");
+	SCENARIO("Employee에 주어진 사원 정보를 저장한다.");
+
+	GIVEN("주어진 사원 정보");
+	Employee employee(manage_, 0, NULL, NULL, NULL, NULL, NULL);
+
+	WHEN("사원 정보가 추가되었을 때");
+
+	THEN("정상적으로 추가가 되어야하고");
+	string sample = "Mock is working";
+	EXPECT_CALL(manage_, testMock()).Times(1).WillOnce(Return(sample));
+
+	string result = employee.test();
+
+	AND("추가된 사원 정보를 확인할 수 있어야 한다.");
+	EXPECT_EQ("Mock is working", result);
+}
 
 TEST(InputValidation, AddInputValidation) {
 	
