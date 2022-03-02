@@ -1,14 +1,24 @@
 #pragma once
 #include <string>
+#include "EmployeeManagementSystem.h"
 
 using namespace std;
 
 class Employee {
 public:
-	Employee(unsigned int employeeNum, string name,
+	~Employee() {};
+	Employee(IEmployeeManagementSystem& manage, unsigned int employeeNum, string name,
 		string cl, string phoneNum, string birthday, string certi) :
-		employeeNum_(employeeNum), name_(name), cl_(cl), phoneNum_(phoneNum),
+		manage_(manage), employeeNum_(employeeNum), name_(name), cl_(cl), phoneNum_(phoneNum),
 		birthday_(birthday), certi_(certi) {};
+
+	string test()
+	{
+		return manage_.testMock();
+	}
+protected:
+	IEmployeeManagementSystem& manage_;
+
 private:
 	unsigned int employeeNum_;
 	string name_;
