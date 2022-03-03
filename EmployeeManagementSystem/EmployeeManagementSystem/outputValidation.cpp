@@ -13,11 +13,7 @@ bool IsValidOutput() {
 	bool ret = true;
 
 	string resultStr, answerStr;
-	while (1) {
-		if (!getline(resultFile, resultStr) || !getline(answerFile, answerStr)) {
-			ret = false;
-			break;
-		}
+	while (getline(resultFile, resultStr) && getline(answerFile, answerStr)) {
 
 		if (resultStr != answerStr) {
 			cout << endl;
