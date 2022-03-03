@@ -3,6 +3,7 @@
 #include "TestUtil.h"
 #include "../EmployeeManagementSystem/input_validation.cpp"
 #include "../EmployeeManagementSystem/outputValidation.cpp"
+#include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -13,7 +14,7 @@ TEST_F(FixtureTestCalculator, SuccessToAdd) {
 	SCENARIO("Employee에 주어진 사원 정보를 저장한다.");
 
 	GIVEN("주어진 사원 정보");
-	Employee employee(manage_, 0, NULL, NULL, NULL, NULL, NULL);
+	Employee employee(0, NULL, NULL, NULL, NULL, NULL);
 
 	WHEN("사원 정보가 추가되었을 때");
 
@@ -21,10 +22,8 @@ TEST_F(FixtureTestCalculator, SuccessToAdd) {
 	string sample = "Mock is working";
 	EXPECT_CALL(manage_, testMock()).Times(1).WillOnce(Return(sample));
 
-	string result = employee.test();
-
 	AND("추가된 사원 정보를 확인할 수 있어야 한다.");
-	EXPECT_EQ("Mock is working", result);
+	// EXPECT_EQ("Mock is working", result);
 }
 
 TEST(InputValidation, TypeValidation) {
@@ -79,7 +78,7 @@ TEST(InputValidation, AddInputValidation) {
 	EXPECT_EQ(true, is_valid_input("ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO"));
 	EXPECT_EQ(true, is_valid_input("ADD, , , ,19050301,JONGSEOK KIM,CL3,010-1234-4321,19900101,PRO"));
 	EXPECT_EQ(true, is_valid_input("ADD, , , ,20030110,JACKSON KIM,CL2,010-9999-2321,19700101,ADV"));
-	EXPECT_EQ(true, is_valid_input("ADD, , , ,15050821,JM Park,CL1,010-8787-1010,20010227,EX"));
+	EXPECT_EQ(true, is_valid_input("ADD, , , ,15050821,JM PARK,CL1,010-8787-1010,20010227,EX"));
 
 	EXPECT_EQ(false, is_valid_input("ADD, , , ,59010101,MC Donald,CL3,010-3434-0101,EX"));
 	EXPECT_EQ(false, is_valid_input("ADD, , , ,18050301,Burger Big King,CL2,010-1234-6055,19980903,PRO"));
@@ -104,13 +103,14 @@ TEST(InputValidation, SchInputValidation) {
 }
 
 TEST(InputValidation, ModInputValidation) {
-	EXPECT_EQ(true, is_valid_input("MOD, , , ,name,KYUMOK KIM"));
-	EXPECT_EQ(true, is_valid_input("MOD,-p, , ,name,KYUMOK KIM"));
-	EXPECT_EQ(true, is_valid_input("MOD,-p,-m, ,phoneNum,1234"));
+
 	EXPECT_EQ(true, is_valid_input("MOD, ,-l, ,name,KIM,phoneNum,010-2321-4584"));
 	EXPECT_EQ(true, is_valid_input("MOD, ,-f, ,name,KYUMOK,name,KYUMOK KING"));
 	EXPECT_EQ(true, is_valid_input("MOD, ,-y, ,birthday,1999,cl,CL4"));
 
+	EXPECT_EQ(false, is_valid_input("MOD, , , ,name,KYUMOK KIM"));
+	EXPECT_EQ(false, is_valid_input("MOD,-p, , ,name,KYUMOK KIM"));
+	EXPECT_EQ(false, is_valid_input("MOD,-p,-m, ,phoneNum,1234"));
 	EXPECT_EQ(false, is_valid_input("Mod, , , ,name,KYUMOK KIM,name,KYUMOK IM"));
 	EXPECT_EQ(false, is_valid_input("MOD,-p,-l, ,birthday,19970102,birthday,19970103"));
 	EXPECT_EQ(false, is_valid_input("MOD,-p,-m, ,phonenum,1234,phoneNum,010-2321-2324"));
@@ -137,6 +137,102 @@ TEST(InputValidation, DelInputValidation) {
 
 TEST(OutputValidation, IsSameAsAnswer) {
 	EXPECT_EQ(true, IsValidOutput());
+}
+
+TEST(ResultStrValidation, TestCase1) {
+	EmployeeManagementSystem employeeMng;
+	employeeMng.inputCommand("ADD, , , ,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV");
+	employeeMng.inputCommand("ADD, , , ,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO");
+	employeeMng.inputCommand("ADD, , , ,18115040,TTETHU HBO,CL3,010-4581-2050,20080718,ADV");
+	employeeMng.inputCommand("ADD, , , ,88114052,NQ LVARW,CL4,010-4528-3059,19911021,PRO");
+	employeeMng.inputCommand("ADD, , , ,19129568,SRERLALH HMEF,CL2,010-3091-9521,19640910,PRO");
+	employeeMng.inputCommand("ADD, , , ,17111236,VSID TVO,CL1,010-3669-1077,20120718,PRO");
+	employeeMng.inputCommand("ADD, , , ,18117906,TWU QSOLT,CL4,010-6672-7186,20030413,PRO");
+	employeeMng.inputCommand("ADD, , , ,08123556,WN XV,CL1,010-7986-5047,20100614,PRO");
+	employeeMng.inputCommand("ADD, , , ,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV");
+	employeeMng.inputCommand("ADD, , , ,03113260,HH LTUPF,CL2,010-5798-5383,19791018,PRO");
+	employeeMng.inputCommand("ADD, , , ,14130827,RPO JK,CL4,010-3231-1698,20090201,ADV");
+	employeeMng.inputCommand("ADD, , , ,01122329,DN WD,CL4,010-7174-5680,20071117,PRO");
+	employeeMng.inputCommand("ADD, , , ,08108827,RTAH VNUP,CL4,010-9031-2726,19780417,ADV");
+	employeeMng.inputCommand("ADD, , , ,85125741,FBAH RTIJ,CL1,010-8900-1478,19780228,ADV");
+	employeeMng.inputCommand("ADD, , , ,08117441,BMU MPOSXU,CL3,010-2703-3153,20010215,ADV");
+	employeeMng.inputCommand("ADD, , , ,10127115,KBU MHU,CL3,010-3284-4054,19660814,ADV");
+	employeeMng.inputCommand("ADD, , , ,12117017,LFIS JJIVL,CL1,010-7914-4067,20120812,PRO");
+	employeeMng.inputCommand("ADD, , , ,11125777,TKOQKIS HC,CL1,010-6734-2289,19991001,PRO");
+	employeeMng.inputCommand("ADD, , , ,11109136,QKAHCEX LTODDO,CL4,010-2627-8566,19640130,PRO");
+	employeeMng.inputCommand("ADD, , , ,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO");
+	employeeMng.inputCommand("SCH,-p,-d, ,birthday,04");
+	EXPECT_EQ("SCH,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("MOD,-p, , ,name,FB NTAWR,birthday,20050520");
+	EXPECT_EQ("MOD,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH, , , ,employeeNum,79110836");
+	EXPECT_EQ("SCH,NONE", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("DEL, , , ,employeeNum,18115040");
+	EXPECT_EQ("DEL,1", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("DEL,-p,-l, ,name,MPOSXU");
+	EXPECT_EQ("DEL,08117441,BMU MPOSXU,CL3,010-2703-3153,20010215,ADV", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p, , ,certi,PRO");
+	string newLine = "\n";
+	string expectResult = "SCH,88114052,NQ LVARW,CL4,010-4528-3059,19911021,PRO" + newLine +
+		"SCH,01122329,DN WD,CL4,010-7174-5680,20071117,PRO" + newLine +
+		"SCH,03113260,HH LTUPF,CL2,010-5798-5383,19791018,PRO" + newLine +
+		"SCH,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO" + newLine +
+		"SCH,08123556,WN XV,CL1,010-7986-5047,20100614,PRO";
+	EXPECT_EQ(expectResult, employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH, , , ,certi,ADV");
+	EXPECT_EQ("SCH,6", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p, , ,cl,CL4");
+	expectResult = "SCH,88114052,NQ LVARW,CL4,010-4528-3059,19911021,PRO" + newLine +
+		"SCH,01122329,DN WD,CL4,010-7174-5680,20071117,PRO" + newLine +
+		"SCH,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV" + newLine +
+		"SCH,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO" + newLine +
+		"SCH,08108827,RTAH VNUP,CL4,010-9031-2726,19780417,ADV";
+	EXPECT_EQ(expectResult, employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH, ,-m, ,birthday,09");
+	EXPECT_EQ("SCH,1", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("MOD,-p, , ,name,FB NTAWR,cl,CL3");
+	EXPECT_EQ("MOD,17112609,FB NTAWR,CL4,010-5645-6122,20050520,PRO", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("MOD,-p, , ,employeeNum,08123556,birthday,20110706");
+	EXPECT_EQ("MOD,08123556,WN XV,CL1,010-7986-5047,20100614,PRO", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p,-y, ,birthday,2003");
+	expectResult = "SCH,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO" + newLine +
+		"SCH,18117906,TWU QSOLT,CL4,010-6672-7186,20030413,PRO";
+	EXPECT_EQ(expectResult, employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p, , ,employeeNum,05101762");
+	EXPECT_EQ("SCH,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p,-m, ,phoneNum,3112");
+	EXPECT_EQ("SCH,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p,-l, ,phoneNum,4605");
+	EXPECT_EQ("SCH,NONE", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH,-p, , ,employeeNum,10127115");
+	EXPECT_EQ("SCH,10127115,KBU MHU,CL3,010-3284-4054,19660814,ADV", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("MOD,-p, , ,phoneNum,010-8900-1478,certi,PRO");
+	EXPECT_EQ("MOD,85125741,FBAH RTIJ,CL1,010-8900-1478,19780228,ADV", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH, ,-f, ,name,LDEXRI");
+	EXPECT_EQ("SCH,NONE", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("MOD, , , ,name,VCUHLE HMU,birthday,19910808");
+	EXPECT_EQ("MOD,1", employeeMng.getResultStr());
+
+	employeeMng.inputCommand("SCH, , , ,name,FB NTAWR");
+	EXPECT_EQ("SCH,1", employeeMng.getResultStr());
 }
 
 TEST(TestCaseName, TestName) {

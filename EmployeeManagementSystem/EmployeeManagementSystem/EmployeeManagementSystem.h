@@ -4,23 +4,30 @@
 #include "Common.h"
 using namespace std;
 
+#define ADD "ADD"
+#define DELETE "DEL"
+#define SEARCH "SCH"
+#define MODIFY "MOD"
+
 class IEmployeeManagementSystem
 {
 public:
 	virtual ~IEmployeeManagementSystem() {};
-	virtual string testMock() = 0;
+	virtual void testMock() = 0;
 };
 
 class EmployeeManagementSystem : public IEmployeeManagementSystem
 {
 public:
-	virtual string testMock() override {};
+	virtual string testMock() override { return "";};
+	virtual void testMock() override {};
+
+	void add(Employee* employee);
+	void del(Employee* employee);
+	void sch(Employee* employee);
+	void mod(Employee* employee);
 
 	void inputCommand(string command);
-	void add(Employee employee);
-	void del(string condition, string keyword);
-	void sch(string condition, string keyword);
-	void mod(string condition, string keyword, string targetCondition, string targetKeyword);
 	void printResult();
 	string getResultStr();
 
