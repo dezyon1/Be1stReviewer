@@ -9,20 +9,24 @@ void EmployeeManagementSystem::inputCommand(string command)
 {
 }
 
-void EmployeeManagementSystem::add(Employee employee)
+void EmployeeManagementSystem::add(Employee* employee)
 {
+	cout << "To do implement add fuction" << endl;
 }
 
-void EmployeeManagementSystem::del(string condition, string keyword)
+void EmployeeManagementSystem::del(Employee* employee)
 {
+	cout << "To do implement del fuction" << endl;
 }
 
-void EmployeeManagementSystem::sch(string condition, string keyword)
+void EmployeeManagementSystem::sch(Employee* employee)
 {
+	cout << "To do implement sch fuction" << endl;
 }
 
-void EmployeeManagementSystem::mod(string condition, string keyword, string targetCondition, string targetKeyword)
+void EmployeeManagementSystem::mod(Employee* employee)
 {
+	cout << "To do implement mod fuction" << endl;
 }
 
 void EmployeeManagementSystem::printResult()
