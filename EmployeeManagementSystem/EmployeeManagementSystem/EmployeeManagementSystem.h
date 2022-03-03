@@ -19,7 +19,6 @@ public:
 class EmployeeManagementSystem : public IEmployeeManagementSystem
 {
 public:
-	virtual string testMock() override { return "";};
 	virtual void testMock() override {};
 
 	void add(Employee* employee);
