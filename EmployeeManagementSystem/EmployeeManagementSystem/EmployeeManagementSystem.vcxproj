@@ -142,15 +142,18 @@
     <ClCompile Include="EmployeeManagementSystem.cpp" />
     <ClCompile Include="input_validation.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="outputValidation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="employee.h" />
     <ClInclude Include="EmployeeManagementSystem.h" />
     <ClInclude Include="input_validation.h" />
+    <ClInclude Include="outputValidation.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
+    <Text Include="output.txt" />
     <Text Include="output_solution.txt" />
   </ItemGroup>
   <ItemGroup>

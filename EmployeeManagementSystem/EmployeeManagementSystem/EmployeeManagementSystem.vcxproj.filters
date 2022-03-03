@@ -21,6 +21,9 @@
     <ClCompile Include="input_validation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="outputValidation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -41,6 +44,9 @@
     <ClInclude Include="EmployeeManagementSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="outputValidation.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -50,6 +56,9 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="output_solution.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="output.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
