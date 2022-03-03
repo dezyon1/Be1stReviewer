@@ -8,5 +8,5 @@ using namespace std;
 
 class MockManage : public IEmployeeManagementSystem {
 public:
-	MOCK_METHOD(string, testMock, (), (override));
+	MOCK_METHOD(void, testMock, (), (override));
 };
