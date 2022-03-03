@@ -11,7 +11,11 @@ bool IsValidOutput() {
 	}
 
 	string resultStr, answerStr;
-	while (getline(resultFile, resultStr)) {
+	while (1) {
+		if (getline(resultFile, resultStr)) {
+			return false;
+		}
+
 		if (!getline(answerFile, answerStr)) {
 			return false;
 		}
