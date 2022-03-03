@@ -3,6 +3,7 @@
 #include "EmployeeManagementSystem.h"
 #include "employee.h"
 #include "input_validation.h"
+#include "command.h"
 
 using namespace std;
 
@@ -13,19 +14,19 @@ string EmployeeManagementSystem::runCommand(string command)
 		throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
 
 	if (command.find_first_of("ADD") == 0) {
-
+		AddCommand add_command = AddCommand(command);
 	}
 
 	if (command.find_first_of("DEL") == 0) {
-
+		DelCommand del_command = DelCommand(command);
 	}
 
 	if (command.find_first_of("MOD") == 0) {
-
+		ModCommand mod_command = ModCommand(command);
 	}
 
 	if (command.find_first_of("SCH") == 0) {
-
+		SchCommand sch_command = SchCommand(command);
 	}
 
 
