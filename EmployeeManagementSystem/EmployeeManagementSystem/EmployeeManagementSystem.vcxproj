@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="command.cpp" />
     <ClCompile Include="EmployeeManagementSystem.cpp" />
     <ClCompile Include="input_validation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="outputValidation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="command.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="employee.h" />
     <ClInclude Include="EmployeeManagementSystem.h" />
