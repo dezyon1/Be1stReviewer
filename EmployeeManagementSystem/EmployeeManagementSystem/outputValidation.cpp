@@ -10,14 +10,13 @@ bool IsValidOutput() {
 		return false;
 	}
 
+	bool ret = true;
+
 	string resultStr, answerStr;
 	while (1) {
-		if (getline(resultFile, resultStr)) {
-			return false;
-		}
-
-		if (!getline(answerFile, answerStr)) {
-			return false;
+		if (!getline(resultFile, resultStr) || !getline(answerFile, answerStr)) {
+			ret = false;
+			break;
 		}
 
 		if (resultStr != answerStr) {
@@ -26,9 +25,14 @@ bool IsValidOutput() {
 			cout << "Result:: " << resultStr << endl;
 			cout << "Expected Result:: " << answerStr << endl;
 			cout << endl;
-			return false;
+
+			ret = false;
+			break;
 		}
 	}
 
-	return true;
+	resultFile.close();
+	answerFile.close();
+
+	return ret;
 }
