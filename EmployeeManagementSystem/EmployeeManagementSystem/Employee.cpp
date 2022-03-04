@@ -1,7 +1,7 @@
 #include "Employee.h"
 
 bool Employee::isMatch(string const& column, string const& keyword) {
-	if (column == "employeeNumber") {
+	if (column == "employeeNum") {
 		if (!keyword.compare(m_employeeInfo.employeeNumber))
 			return true;
 	}
@@ -13,11 +13,11 @@ bool Employee::isMatch(string const& column, string const& keyword) {
 		if (!keyword.compare(m_employeeInfo.cl))
 			return true;
 	}
-	else if (column == "phoneNumber") {
+	else if (column == "phoneNum") {
 		if (!keyword.compare(m_employeeInfo.phoneNumber))
 			return true;
 	}
-	else if (column == "birth") {
+	else if (column == "birthday") {
 		if (!keyword.compare(m_employeeInfo.birth))
 			return true;
 	}
