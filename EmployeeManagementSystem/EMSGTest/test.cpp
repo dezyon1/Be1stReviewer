@@ -7,6 +7,7 @@
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
 #include "../EmployeeManagementSystem/Employee.cpp"
 #include "../EmployeeManagementSystem/Employee.h"
+#include "../EmployeeManagementSystem/Database.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -222,6 +223,38 @@ TEST(ResultStrValidation, TestCase1) {
 	EXPECT_EQ("MOD,1", employeeMng.runCommand("MOD, , , ,name,VCUHLE HMU,birthday,19910808"));
 
 	EXPECT_EQ("SCH,1", employeeMng.runCommand("SCH, , , ,name,FB NTAWR"));
+}
+
+TEST(DatabaseTest, SimpleTest) {
+	VectorDatabase<Employee> vDatabase;
+	IDatabase<Employee>& iDatabase = vDatabase;
+
+	vector<Employee> result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(0, result.size());
+
+	iDatabase.add(Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV"));
+	result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("cl", "CL3");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("phoneNum", "010-3112-2609");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("birthday", "19771211");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("certi", "ADV");
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.mod("employeeNum", "15123099", "name", "KANG");
+	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	EXPECT_EQ(0, result.size());
+	result = iDatabase.sch("name", "KANG");
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.del("employeeNum", "15123099");
+	result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(0, result.size());
 }
 
 TEST(TestCaseName, TestName) {
