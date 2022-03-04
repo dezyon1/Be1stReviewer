@@ -11,9 +11,9 @@ template <typename record>
 class IDatabase {
 public:
 	virtual void add(record& data) = 0;
-	virtual vector<record>& del(string const& column, string const& keyword) = 0;
-	virtual vector<record>& sch(string const& column, string const& keyword) = 0;
-	virtual vector<record>& mod(string const& column, string const& keyword,
+	virtual vector<record> del(string const& column, string const& keyword) = 0;
+	virtual vector<record> sch(string const& column, string const& keyword) = 0;
+	virtual vector<record> mod(string const& column, string const& keyword,
 		string const& tarColumn, string const& tarKeyword) = 0;
 };
 
@@ -21,15 +21,15 @@ template <typename record>
 class VectorDatabase : public IDatabase<record> {
 public:
 	virtual void add(record& data) override {};
-	virtual vector<record>& del(string const& column, string const& keyword) override {
+	virtual vector<record> del(string const& column, string const& keyword) override {
 		vector<record> temp;
 		return temp;
 	};
-	virtual vector<record>& sch(string const& column, string const& keyword) override {
+	virtual vector<record> sch(string const& column, string const& keyword) override {
 		vector<record> temp;
 		return temp;
 	};
-	virtual vector<record>& mod(string const& column, string const& keyword,
+	virtual vector<record> mod(string const& column, string const& keyword,
 		string const& tarColumn, string const& tarKeyword) override {
 		vector<record> temp;
 		return temp;
