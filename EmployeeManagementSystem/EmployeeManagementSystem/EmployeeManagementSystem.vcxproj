@@ -139,21 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="command.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Database.cpp" />
+    <ClCompile Include="Employee.cpp" />
     <ClCompile Include="EmployeeManagementSystem.cpp" />
-    <ClCompile Include="input_validation.cpp" />
+    <ClCompile Include="InputValidation.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="outputValidation.cpp" />
+    <ClCompile Include="OutputValidation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="command.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Database.h" />
-    <ClInclude Include="employee.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="EmployeeManagementSystem.h" />
-    <ClInclude Include="input_validation.h" />
-    <ClInclude Include="outputValidation.h" />
+    <ClInclude Include="InputValidation.h" />
+    <ClInclude Include="OutputValidation.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

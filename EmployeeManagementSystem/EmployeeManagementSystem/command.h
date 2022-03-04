@@ -2,7 +2,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "input_validation.h"
+#include "InputValidation.h"
 
 using std::vector;
 using std::string;
@@ -10,7 +10,7 @@ using std::string;
 class iCommand {
 public:
 	iCommand(string command) {
-		if (isValidInput(command))
+		if (!isValidInput(command))
 			throw std::invalid_argument("입력 형식이 잘못되었습니다. : " + command);
 		std::stringstream ss(command);
 		string temp;

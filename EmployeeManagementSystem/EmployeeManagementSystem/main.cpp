@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "EmployeeManagementSystem.h"
-#include "employee.h"
+#include "Employee.h"
 
 using namespace std;
 

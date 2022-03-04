@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include "EmployeeManagementSystem.h"
-#include "employee.h"
-#include "input_validation.h"
-#include "command.h"
+#include "Employee.h"
+#include "InputValidation.h"
+#include "Command.h"
 
 using namespace std;
 
@@ -13,19 +13,19 @@ string EmployeeManagementSystem::runCommand(string command)
 	if (!isValidInput(command))
 		throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
 
-	if (command.find_first_of("ADD") == 0) {
+	if (command.find("ADD") == 0) {
 		AddCommand add_command = AddCommand(command);
 	}
 
-	if (command.find_first_of("DEL") == 0) {
+	if (command.find("DEL") == 0) {
 		DelCommand del_command = DelCommand(command);
 	}
 
-	if (command.find_first_of("MOD") == 0) {
+	if (command.find("MOD") == 0) {
 		ModCommand mod_command = ModCommand(command);
 	}
 
-	if (command.find_first_of("SCH") == 0) {
+	if (command.find("SCH") == 0) {
 		SchCommand sch_command = SchCommand(command);
 	}
 

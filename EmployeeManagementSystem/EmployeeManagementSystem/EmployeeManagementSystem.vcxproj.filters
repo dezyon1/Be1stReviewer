@@ -18,16 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="input_validation.cpp">
+    <ClCompile Include="InputValidation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="outputValidation.cpp">
+    <ClCompile Include="OutputValidation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EmployeeManagementSystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="command.cpp">
+    <ClCompile Include="Command.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
 <<<<<<< HEAD
@@ -47,28 +47,34 @@
     <ClCompile Include="Database.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 >>>>>>> master
 =======
 >>>>>>> Stashed changes
+=======
+    <ClCompile Include="Employee.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="input_validation.h">
+    <ClInclude Include="InputValidation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="employee.h">
+    <ClInclude Include="Employee.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EmployeeManagementSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="outputValidation.h">
+    <ClInclude Include="OutputValidation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="command.h">
+    <ClInclude Include="Command.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Database.h">
