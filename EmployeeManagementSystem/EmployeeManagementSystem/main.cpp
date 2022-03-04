@@ -26,11 +26,14 @@ int main(int argc, char** argv)
 	VectorDatabase<Employee> vDB;
 	EmployeeManagementSystem* employeeManagementSystem = new EmployeeManagementSystem(vDB);
 
+	remove("output.txt");
+
 	ifstream inputFile;
 	ofstream outputFile;
 
 	inputFile.open("input.txt");
 	outputFile.open("output.txt");
+
 	if (inputFile.is_open() == false)
 	{
 		return false;
@@ -44,7 +47,10 @@ int main(int argc, char** argv)
 	while (getline(inputFile, inputLine))
 	{
 		string result = employeeManagementSystem->runCommand(inputLine);
-		outputFile << result << endl;
+		
+		if (!result.empty()) {
+			outputFile << result << endl;
+		}
 	}
 
 	inputFile.close();
