@@ -69,7 +69,7 @@ string EmployeeManagementSystem::resultToString(vector<Employee> result, string 
 		return string("");
 
 	if (result.size() == 0)
-		return string("None");
+		return string(command + ",NONE");
 
 	if (option == "-p") {
 		string str;
@@ -82,5 +82,5 @@ string EmployeeManagementSystem::resultToString(vector<Employee> result, string 
 		return str;
 	}
 
-	return std::to_string(result.size());
+	return command + "," + std::to_string(result.size());
 }
