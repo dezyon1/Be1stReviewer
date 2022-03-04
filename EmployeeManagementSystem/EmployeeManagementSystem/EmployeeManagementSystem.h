@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Common.h"
+#include "Database.h"
 using namespace std;
 
 class IEmployeeManagementSystem
@@ -14,6 +15,7 @@ public:
 class EmployeeManagementSystem : public IEmployeeManagementSystem
 {
 public:
+	EmployeeManagementSystem(IDatabase<Employee>* database) : database_(database) {};
 	virtual void testMock() override {};
 
 	string runCommand(string command);
@@ -23,4 +25,6 @@ private:
 	string del(string command);
 	string mod(string command);
 	string sch(string command);
+
+	IDatabase<Employee>* database_;
 };

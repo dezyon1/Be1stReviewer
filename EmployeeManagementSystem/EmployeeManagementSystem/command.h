@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "InputValidation.h"
+#include "Database.h"
 
 using std::vector;
 using std::string;
@@ -70,6 +71,8 @@ public:
 		modColumn = commandTokens[5];
 		modValue = commandTokens[6];
 	}
+
+	string run(IDatabase<Employee>* database);
 private:
 	string modColumn;
 	string modValue;

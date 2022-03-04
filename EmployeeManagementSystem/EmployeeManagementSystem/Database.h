@@ -31,8 +31,14 @@ public:
 	};
 	virtual vector<record> mod(string const& column, string const& keyword,
 		string const& tarColumn, string const& tarKeyword) override {
-		vector<record> temp;
-		return temp;
+		vector<record> schResult;
+		for (auto& it : database) {
+			if (it.isMatch(column, keyword)) {
+				schResult.push_back(it);
+				it.setData(tarColumn, tarKeyword);
+			}
+		}
+		return schResult;
 	};
 
 private:

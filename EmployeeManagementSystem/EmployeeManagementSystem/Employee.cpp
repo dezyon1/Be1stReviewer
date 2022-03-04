@@ -27,3 +27,25 @@ bool Employee::isMatch(string const& column, string const& keyword) {
 	}
 	return false;
 }
+
+void Employee::setData(string const& column, string const& value) {
+	if (column == "employeeNum") {
+		m_employeeInfo.employeeNumber = value;
+	}
+	else if (column == "name") {
+		m_employeeInfo.name = value;
+	}
+	else if (column == "cl") {
+		m_employeeInfo.cl = value;
+	}
+	else if (column == "phoneNum") {
+		m_employeeInfo.phoneNumber = value;
+	}
+	else if (column == "birthday") {
+		m_employeeInfo.birth = value;
+	}
+	else if (column == "certi") {
+		m_employeeInfo.certi = value;
+	}
+}
+

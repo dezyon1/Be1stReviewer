@@ -5,6 +5,9 @@
 #include "../EmployeeManagementSystem/InputValidation.cpp"
 #include "../EmployeeManagementSystem/OutputValidation.cpp"
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
+#include "../EmployeeManagementSystem/Employee.cpp"
+#include "../EmployeeManagementSystem/Database.cpp"
+#include "../EmployeeManagementSystem/Command.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -144,7 +147,8 @@ TEST(OutputValidation, IsSameAsAnswer) {
 }
 
 TEST(ResultStrValidation, TestCase1) {
-	EmployeeManagementSystem employeeMng;
+	VectorDatabase<Employee>* DB = new VectorDatabase<Employee>();
+	EmployeeManagementSystem employeeMng(DB);
 	employeeMng.runCommand("ADD, , , ,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV");
 	employeeMng.runCommand("ADD, , , ,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO");
 	employeeMng.runCommand("ADD, , , ,18115040,TTETHU HBO,CL3,010-4581-2050,20080718,ADV");

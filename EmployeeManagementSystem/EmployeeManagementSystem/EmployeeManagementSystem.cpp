@@ -4,6 +4,7 @@
 #include "Employee.h"
 #include "InputValidation.h"
 #include "Command.h"
+#include "Database.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ string EmployeeManagementSystem::runCommand(string command)
 
 	if (command.find("MOD") == 0) {
 		ModCommand mod_command = ModCommand(command);
+		mod_command.run(database_);
 	}
 
 	if (command.find("SCH") == 0) {
