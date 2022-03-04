@@ -23,7 +23,8 @@ enum EmployeeInfoSequence
 
 int main(int argc, char** argv)
 {
-	EmployeeManagementSystem* employeeManagementSystem = new EmployeeManagementSystem();
+	VectorDatabase<Employee> vDB;
+	EmployeeManagementSystem* employeeManagementSystem = new EmployeeManagementSystem(vDB);
 
 	ifstream inputFile;
 	ofstream outputFile;
