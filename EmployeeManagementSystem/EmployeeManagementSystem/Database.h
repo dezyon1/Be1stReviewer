@@ -24,15 +24,16 @@ public:
 		database.push_back(data);
 	};
 	virtual vector<record> del(string const& column, string const& keyword) override {
-		vector<record> temp = sch(column, keyword);
+		vector<record> temp;
+		for (int i = 0; i < database.size(); ) {
+			auto &r = database[i];
 
-		for (auto & del_record : temp) {
-			for (int i = 0; i < database.size(); i++) {
-				if (del_record.getValue("employeeNum") == database[i].getValue("employeeNum")) {
-					database.erase(database.begin() + i);
-					break;
-				}
+			if (!r.isMatch(column, keyword)) {
+				i++;
+				continue;
 			}
+			temp.push_back(r);
+			database.erase(database.begin() + i);
 		}
 		return temp;
 	};
