@@ -18,26 +18,27 @@ string EmployeeManagementSystem::runCommand(string command)
 		AddCommand add_command = AddCommand(command);
 		Employee employee = add_command.getEmployee();
 		database_.add(employee);
+
 		return string("");
 	}
 
 	if (command.find("DEL") == 0) {
 		DelCommand del_command = DelCommand(command);
-		vector<Employee> result = database_.del(del_command.getSearchColumn(), del_command.getSearchValue());
+		vector<Employee> result = database_.del(del_command.getSearchColumn(), del_command.getSearchValue(), del_command.getOption2());
 
 		return resultToString(result, del_command.getOption1(), "DEL");
 	}
 
 	if (command.find("MOD") == 0) {
 		ModCommand mod_command = ModCommand(command);
-		vector<Employee> result = database_.mod(mod_command.getSearchColumn(), mod_command.getSearchValue(), mod_command.getModColumn(), mod_command.getModValue());
+		vector<Employee> result = database_.mod(mod_command.getSearchColumn(), mod_command.getSearchValue(), mod_command.getOption2(), mod_command.getModColumn(), mod_command.getModValue());
 
 		return resultToString(result, mod_command.getOption1(), "MOD");
 	}
 
 	if (command.find("SCH") == 0) {
 		SchCommand sch_command = SchCommand(command);
-		vector<Employee> result = database_.sch(sch_command.getSearchColumn(), sch_command.getSearchValue());
+		vector<Employee> result = database_.sch(sch_command.getSearchColumn(), sch_command.getSearchValue(), sch_command.getOption2());
 
 		return resultToString(result, sch_command.getOption1(), "SCH");
 	}

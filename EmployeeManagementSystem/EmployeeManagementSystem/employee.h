@@ -11,6 +11,7 @@ public:
 	};
 
 	bool isMatch(string const& column, string const& keyword);
+	bool isMatch(string const& column, string const& keyword, string const& option);
 	string getValue(string const& column);
 	void setValue(string const& column, string const & value);
 	bool operator<(const Employee& e) {

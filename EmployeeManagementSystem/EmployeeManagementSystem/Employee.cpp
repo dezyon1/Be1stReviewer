@@ -28,6 +28,10 @@ bool Employee::isMatch(string const& column, string const& keyword) {
 	return false;
 }
 
+bool Employee::isMatch(string const& column, string const& keyword, string const& option) {
+	return true;
+}
+
 string Employee::getValue(string const& column)
 {
 	if (column == "employeeNum") 
