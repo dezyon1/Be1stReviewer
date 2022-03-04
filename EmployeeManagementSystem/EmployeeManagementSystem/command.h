@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include <vector>
 #include "InputValidation.h"
 #include "employee.h"
@@ -20,6 +21,7 @@ public:
 			commandTokens.push_back(temp);
 		}
 	}
+	virtual string run(IDatabase<Employee>& database) = 0;
 protected:
 	vector<string> commandTokens;
 };
@@ -34,9 +36,14 @@ public:
 		birthday = commandTokens[8];
 		certi = commandTokens[9];
 	};
-	Employee getEmployee() {
-		return Employee(employeeNum, name, cl, phoneNum, birthday, certi);
+	
+	virtual string run(IDatabase<Employee>& database) override
+	{
+		Employee employee = Employee(employeeNum, name, cl, phoneNum, birthday, certi);
+		database.add(employee);
+		return string("");
 	};
+
 private:
 	string employeeNum;
 	string name;
@@ -54,19 +61,29 @@ public:
 		searchColumn = commandTokens[4];
 		searchValue = commandTokens[5];
 	}
-	const string& getOption1() {
-		return option1;
-	}
-	const string& getOption2() {
-		return option2;
-	}
-	const string& getSearchColumn() {
-		return searchColumn;
-	}
-	const string& getSearchValue() {
-		return searchValue;
-	}
+	
+	virtual string run(IDatabase<Employee>& database) = 0;
+
 protected:
+	string resultToString(vector<Employee> result, string option, string command)
+	{
+		if (result.size() == 0)
+			return string("None");
+
+		if (option == "-p") {
+			string str;
+			sort(result.begin(), result.end());
+			for (int i = 0; i < 5 && i < result.size(); i++) {
+				if (i != 0)
+					str += "\n";
+				str += (command + "," + result[i].toString());
+			}
+			return str;
+		}
+
+		return std::to_string(result.size());
+	}
+
 	string option1;
 	string option2;
 	string searchColumn;
@@ -77,12 +94,22 @@ class DelCommand : public iSchCommand {
 public:
 	DelCommand(string command):iSchCommand(command){
 	};
-
+	string run(IDatabase<Employee>& database) override
+	{
+		vector<Employee> result = database.del(searchColumn, searchValue);
+		return resultToString(result, option1, "DEL");
+	};
 };
 
 class SchCommand : public iSchCommand {
 public:
 	SchCommand(string command) :iSchCommand(command) {
+	};
+	string run(IDatabase<Employee>& database) override
+	{
+		vector<Employee> result = database.sch(searchColumn, searchValue);
+
+		return resultToString(result, option1, "SCH");
 	};
 };
 
@@ -92,13 +119,42 @@ public:
 		modColumn = commandTokens[6];
 		modValue = commandTokens[7];
 	}
-	const string& getModColumn() {
-		return modColumn;
-	}
-	const string& getModValue() {
-		return modValue;
-	}
+	
+	string run(IDatabase<Employee>& database) override
+	{
+		vector<Employee> result = database.mod(searchColumn, searchValue, modColumn, modValue);
+		return resultToString(result, option1, "MOD");
+	};
 private:
 	string modColumn;
 	string modValue;
+};
+
+class IFactoryCommand {
+public:
+	virtual iCommand* createCommand(string command) = 0;
+};
+
+class FactoryCommand : public IFactoryCommand {
+public:
+	iCommand* createCommand(string command) override {
+
+		if (command.find("ADD") == 0) {
+			return new AddCommand(command);
+		}
+
+		if (command.find("DEL") == 0) {
+			return new DelCommand(command);
+		}
+
+		if (command.find("SCH") == 0) {
+			return new SchCommand(command);
+		}
+
+		if (command.find("MOD") == 0) {
+			return new ModCommand(command);
+		}
+
+		throw exception("객체를 생성할 수 없습니다");
+	}
 };
