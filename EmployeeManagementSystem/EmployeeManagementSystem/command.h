@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "InputValidation.h"
+#include "employee.h"
 
 using std::vector;
 using std::string;
@@ -26,8 +27,16 @@ protected:
 class AddCommand : public iCommand {
 public:
 	AddCommand(string command) :iCommand(command) {
-
-	}
+		employeeNum = commandTokens[4];
+		name = commandTokens[5];
+		cl = commandTokens[6];
+		phoneNum = commandTokens[7];
+		birthday = commandTokens[8];
+		certi = commandTokens[9];
+	};
+	Employee getEmployee() {
+		return Employee(employeeNum, name, cl, phoneNum, birthday, certi);
+	};
 private:
 	string employeeNum;
 	string name;
@@ -42,8 +51,20 @@ public:
 	iSchCommand(string command) :iCommand(command) {
 		option1 = commandTokens[1];
 		option2 = commandTokens[2];
-		searchColumn = commandTokens[3];
-		searchValue = commandTokens[4];
+		searchColumn = commandTokens[4];
+		searchValue = commandTokens[5];
+	}
+	const string& getOption1() {
+		return option1;
+	}
+	const string& getOption2() {
+		return option2;
+	}
+	const string& getSearchColumn() {
+		return searchColumn;
+	}
+	const string& getSearchValue() {
+		return searchValue;
 	}
 protected:
 	string option1;
@@ -56,6 +77,7 @@ class DelCommand : public iSchCommand {
 public:
 	DelCommand(string command):iSchCommand(command){
 	};
+
 };
 
 class SchCommand : public iSchCommand {
@@ -67,8 +89,14 @@ public:
 class ModCommand : public iSchCommand {
 public:
 	ModCommand(string command) :iSchCommand(command) {
-		modColumn = commandTokens[5];
-		modValue = commandTokens[6];
+		modColumn = commandTokens[6];
+		modValue = commandTokens[7];
+	}
+	const string& getModColumn() {
+		return modColumn;
+	}
+	const string& getModValue() {
+		return modValue;
 	}
 private:
 	string modColumn;

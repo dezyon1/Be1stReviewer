@@ -20,18 +20,41 @@ public:
 template <typename record>
 class VectorDatabase : public IDatabase<record> {
 public:
-	virtual void add(record& data) override {};
+	virtual void add(record& data) override {
+		database.push_back(data);
+	};
 	virtual vector<record> del(string const& column, string const& keyword) override {
 		vector<record> temp;
+		for (int i = 0; i < database.size(); ) {
+			auto &r = database[i];
+
+			if (!r.isMatch(column, keyword)) {
+				i++;
+				continue;
+			}
+			temp.push_back(r);
+			database.erase(database.begin() + i);
+		}
 		return temp;
 	};
 	virtual vector<record> sch(string const& column, string const& keyword) override {
 		vector<record> temp;
+		for (auto & r : database) {
+			if (r.isMatch(column, keyword)) {
+				temp.push_back(r);
+			}
+		}
 		return temp;
 	};
 	virtual vector<record> mod(string const& column, string const& keyword,
 		string const& tarColumn, string const& tarKeyword) override {
-		vector<record> temp;
+		vector<record> temp = sch(column, keyword);
+		
+		for (auto & r:database) {
+			if (keyword == r.getValue(column)) {
+				r.setValue(tarColumn, tarKeyword);
+			}
+		}	
 		return temp;
 	};
 

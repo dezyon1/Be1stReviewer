@@ -5,6 +5,8 @@
 #include "../EmployeeManagementSystem/InputValidation.cpp"
 #include "../EmployeeManagementSystem/OutputValidation.cpp"
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
+#include "../EmployeeManagementSystem/Employee.cpp"
+#include "../EmployeeManagementSystem/Employee.h"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -144,7 +146,8 @@ TEST(OutputValidation, IsSameAsAnswer) {
 }
 
 TEST(ResultStrValidation, TestCase1) {
-	EmployeeManagementSystem employeeMng;
+	VectorDatabase<Employee> vDB;
+	EmployeeManagementSystem employeeMng(vDB);
 	employeeMng.runCommand("ADD, , , ,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV");
 	employeeMng.runCommand("ADD, , , ,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO");
 	employeeMng.runCommand("ADD, , , ,18115040,TTETHU HBO,CL3,010-4581-2050,20080718,ADV");
@@ -166,6 +169,7 @@ TEST(ResultStrValidation, TestCase1) {
 	employeeMng.runCommand("ADD, , , ,11109136,QKAHCEX LTODDO,CL4,010-2627-8566,19640130,PRO");
 	employeeMng.runCommand("ADD, , , ,05101762,VCUHLE HMU,CL4,010-3988-9289,20030819,PRO");
 
+	EXPECT_EQ("SCH,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV", employeeMng.runCommand("SCH,-p, , ,birthday,19950704"));
 	EXPECT_EQ("SCH,02117175,SBILHUT LDEXRI,CL4,010-2814-1699,19950704,ADV", employeeMng.runCommand("SCH,-p,-d, ,birthday,04"));
 
 	EXPECT_EQ("MOD,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO", employeeMng.runCommand("MOD,-p, , ,name,FB NTAWR,birthday,20050520"));
