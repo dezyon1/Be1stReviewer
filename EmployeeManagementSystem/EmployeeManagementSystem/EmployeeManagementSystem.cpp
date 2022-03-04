@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "EmployeeManagementSystem.h"
 #include "Employee.h"
+#include "EmployeeManagementSystem.h"
 #include "InputValidation.h"
 #include "Command.h"
 
@@ -15,6 +15,9 @@ string EmployeeManagementSystem::runCommand(string command)
 
 	if (command.find("ADD") == 0) {
 		AddCommand add_command = AddCommand(command);
+		EmployeeInfo employeeInfo = add_command.getEmployeeInfo(command);
+		Employee employee(employeeInfo);
+		database_.add(employee);
 	}
 
 	if (command.find("DEL") == 0) {
@@ -28,7 +31,6 @@ string EmployeeManagementSystem::runCommand(string command)
 	if (command.find("SCH") == 0) {
 		SchCommand sch_command = SchCommand(command);
 	}
-
 
 	return result;
 }

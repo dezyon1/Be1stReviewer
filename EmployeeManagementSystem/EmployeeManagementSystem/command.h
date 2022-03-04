@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "InputValidation.h"
+#include "Employee.h"
 
 using std::vector;
 using std::string;
@@ -25,10 +26,21 @@ protected:
 
 class AddCommand : public iCommand {
 public:
-	AddCommand(string command) :iCommand(command) {
-
-	}
+	AddCommand(string command) :iCommand(command) {}
+	EmployeeInfo getEmployeeInfo(string command);
 private:
+	enum EmployeeInfoSequence
+	{
+		EmployeeNum,
+		Name,
+		CL,
+		PhoneNum,
+		Birthday,
+		CERTI,
+		EmployeeInfoCount
+	};
+	static const int InfoStartIndex = 9;
+	string employeeInfoSeq[EmployeeInfoCount];
 	string employeeNum;
 	string name;
 	string cl;

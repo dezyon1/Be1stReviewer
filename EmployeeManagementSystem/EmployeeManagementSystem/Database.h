@@ -20,7 +20,7 @@ public:
 template <typename record>
 class VectorDatabase : public IDatabase<record> {
 public:
-	virtual void add(record& data) override {};
+	virtual void add(record& data) override;
 	virtual vector<record> del(string const& column, string const& keyword) override {
 		vector<record> temp;
 		return temp;
