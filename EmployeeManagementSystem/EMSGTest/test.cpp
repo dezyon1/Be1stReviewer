@@ -2,8 +2,8 @@
 #include "test.h"
 #include "TestUtil.h"
 
-#include "../EmployeeManagementSystem/input_validation.cpp"
-#include "../EmployeeManagementSystem/outputValidation.cpp"
+#include "../EmployeeManagementSystem/InputValidation.cpp"
+#include "../EmployeeManagementSystem/OutputValidation.cpp"
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
 
 using ::testing::_;

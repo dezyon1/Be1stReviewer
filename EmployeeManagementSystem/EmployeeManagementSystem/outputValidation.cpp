@@ -1,4 +1,4 @@
-#include "outputValidation.h"
+#include "OutputValidation.h"
 using namespace std;
 
 bool IsValidOutput() {

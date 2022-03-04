@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include "EmployeeManagementSystem.h"
-#include "employee.h"
-#include "input_validation.h"
-#include "command.h"
+#include "Employee.h"
+#include "InputValidation.h"
+#include "Command.h"
 
 using namespace std;
 
