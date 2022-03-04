@@ -21,14 +21,30 @@ template <typename record>
 class VectorDatabase : public IDatabase<record> {
 public:
 	virtual void add(record& data) override {};
+
 	virtual vector<record> del(string const& column, string const& keyword) override {
-		vector<record> temp;
-		return temp;
-	};
+		vector<record> deletedRecs;
+
+		for (int i = 0; i < database.size(); ) {
+			auto r = database[i];
+
+			if (!r.isMatch(column, keyword)) {
+				i++;
+				continue;
+			}
+
+			database.erase(database.begin() + i);
+			deletedRecs.push_back(r);
+		}
+
+		return deletedRecs;
+	}
+
 	virtual vector<record> sch(string const& column, string const& keyword) override {
 		vector<record> temp;
 		return temp;
 	};
+
 	virtual vector<record> mod(string const& column, string const& keyword,
 		string const& tarColumn, string const& tarKeyword) override {
 		vector<record> temp;

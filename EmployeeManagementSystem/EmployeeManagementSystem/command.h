@@ -42,9 +42,15 @@ public:
 	iSchCommand(string command) :iCommand(command) {
 		option1 = commandTokens[1];
 		option2 = commandTokens[2];
-		searchColumn = commandTokens[3];
-		searchValue = commandTokens[4];
+		searchColumn = commandTokens[4];
+		searchValue = commandTokens[5];
 	}
+
+	const string& getOption1() { return option1; }
+	const string& getOption2() { return option2; }
+	const string& getSearchColumn() { return searchColumn; }
+	const string& getSearchValue() { return searchValue; }
+
 protected:
 	string option1;
 	string option2;
@@ -56,6 +62,7 @@ class DelCommand : public iSchCommand {
 public:
 	DelCommand(string command):iSchCommand(command){
 	};
+
 };
 
 class SchCommand : public iSchCommand {

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include "EmployeeManagementSystem.h"
 #include "Employee.h"
@@ -19,6 +20,39 @@ string EmployeeManagementSystem::runCommand(string command)
 
 	if (command.find("DEL") == 0) {
 		DelCommand del_command = DelCommand(command);
+
+		string column = del_command.getSearchColumn();
+		string value = del_command.getSearchValue();
+		if (column.empty() || value.empty()) {
+			return "";
+		}
+
+		auto result = database_.del(column, value);
+
+		string opt1 = del_command.getOption1();
+		//string opt2 = del_command.getOption2();
+		if (opt1.empty()) {
+			return to_string(result.size());
+		}
+
+		if (opt1 == "-p") {
+			cout << "delete print" << endl;
+
+			/* sorting */
+			//std::sort(result.begin(), result.end(),
+			//	[](Employee a, Employee b) {
+			//		return a.getEmployeeID() < b.getEmployeeID();
+			//	});
+
+			int printCnt = 0;
+			for (auto emp : result) {
+				if (printCnt == 5) {
+					break; 
+				}
+				cout << emp.getInfoStr() << endl;
+				printCnt++;
+			}
+		}
 	}
 
 	if (command.find("MOD") == 0) {

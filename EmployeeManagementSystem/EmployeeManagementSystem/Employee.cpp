@@ -27,3 +27,18 @@ bool Employee::isMatch(string const& column, string const& keyword) {
 	}
 	return false;
 }
+
+string Employee::getInfoStr() {
+	string ret = m_employeeInfo.employeeNumber + ","
+		+ m_employeeInfo.name + ","
+		+ m_employeeInfo.cl + ","
+		+ m_employeeInfo.phoneNumber + ","
+		+ m_employeeInfo.birth + ","
+		+ m_employeeInfo.certi;
+
+	return ret;
+}
+
+int Employee::getEmployeeID() {
+	return stoi(m_employeeInfo.employeeNumber);
+}

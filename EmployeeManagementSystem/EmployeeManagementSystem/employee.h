@@ -20,6 +20,8 @@ public:
 	Employee(EmployeeInfo& employeeInfo) : m_employeeInfo(employeeInfo) {};
 
 	bool isMatch(string const& column, string const& keyword);
+	string getInfoStr();
+	int getEmployeeID();
 
 private:
 	EmployeeInfo m_employeeInfo;
