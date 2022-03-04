@@ -47,7 +47,10 @@ int main(int argc, char** argv)
 	while (getline(inputFile, inputLine))
 	{
 		string result = employeeManagementSystem->runCommand(inputLine);
-		outputFile << result << endl;
+		
+		if (!result.empty()) {
+			outputFile << result << endl;
+		}
 	}
 
 	inputFile.close();
