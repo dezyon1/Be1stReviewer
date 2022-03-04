@@ -2,7 +2,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "input_validation.h"
+#include "InputValidation.h"
 
 using std::vector;
 using std::string;

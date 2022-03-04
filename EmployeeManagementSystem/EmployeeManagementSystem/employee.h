@@ -19,6 +19,8 @@ public:
 	~Employee() {};
 	Employee(EmployeeInfo& employeeInfo) : m_employeeInfo(employeeInfo) {};
 
+	bool isMatch(string const& column, string const& keyword);
+
 private:
 	EmployeeInfo m_employeeInfo;
 };
