@@ -11,9 +11,9 @@ template <typename record>
 class IDatabase {
 public:
 	virtual void add(record& data) = 0;
-	virtual vector<record> del(string const& column, string const& keyword) = 0;
-	virtual vector<record> sch(string const& column, string const& keyword) = 0;
-	virtual vector<record> mod(string const& column, string const& keyword,
+	virtual vector<record> del(string const& column, string const& keyword, string const& option) = 0;
+	virtual vector<record> sch(string const& column, string const& keyword, string const& option) = 0;
+	virtual vector<record> mod(string const& column, string const& keyword, string const& option,
 		string const& tarColumn, string const& tarKeyword) = 0;
 };
 
@@ -23,12 +23,13 @@ public:
 	virtual void add(record& data) override {
 		database.push_back(data);
 	};
-	virtual vector<record> del(string const& column, string const& keyword) override {
+
+	virtual vector<record> del(string const& column, string const& keyword, string const& option) override {
 		vector<record> temp;
 		for (int i = 0; i < database.size(); ) {
 			auto &r = database[i];
 
-			if (!r.isMatch(column, keyword)) {
+			if (!r.isMatch(column, keyword, option)) {
 				i++;
 				continue;
 			}
@@ -37,18 +38,20 @@ public:
 		}
 		return temp;
 	};
-	virtual vector<record> sch(string const& column, string const& keyword) override {
+	
+	virtual vector<record> sch(string const& column, string const& keyword, string const& option) override {
 		vector<record> temp;
 		for (auto & r : database) {
-			if (r.isMatch(column, keyword)) {
+			if (r.isMatch(column, keyword, option)) {
 				temp.push_back(r);
 			}
 		}
 		return temp;
 	};
-	virtual vector<record> mod(string const& column, string const& keyword,
+	
+	virtual vector<record> mod(string const& column, string const& keyword, string const& option,
 		string const& tarColumn, string const& tarKeyword) override {
-		vector<record> temp = sch(column, keyword);
+		vector<record> temp = sch(column, keyword, option);
 		
 		for (auto & r:database) {
 			if (keyword == r.getValue(column)) {
