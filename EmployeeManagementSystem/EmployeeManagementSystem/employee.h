@@ -23,16 +23,16 @@ public:
 		string str1;
 		string str2;
 		if (employeeNumber_[0] <= '2') {
-			str1 = "1" + employeeNumber_[0];
+			str1 = "1" + employeeNumber_;
 		}
 		else {
-			str1 = "0" + employeeNumber_[0];
+			str1 = "0" + employeeNumber_;
 		}
 		if (e.employeeNumber_[0] <= '2') {
-			str2 = "1" + e.employeeNumber_[0];
+			str2 = "1" + e.employeeNumber_;
 		}
 		else {
-			str2 = "0" + e.employeeNumber_[0];
+			str2 = "0" + e.employeeNumber_;
 		}
 		return str1 < str2;
 	};
