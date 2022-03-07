@@ -2,7 +2,6 @@
 #include <string>
 #include "EmployeeManagementSystem.h"
 #include "Employee.h"
-#include "InputValidation.h"
 #include "Command.h"
 #include "CommandFactory.h"
 
@@ -10,9 +9,6 @@ using namespace std;
 
 string EmployeeManagementSystem::runCommand(string command)
 {
-	if (!isValidInput(command))
-		throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
-
 	CommandFactory commandFactory;
 	iCommand* pICommand;
 	try {
