@@ -33,7 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClInclude Include="MockManage.h" />
+    <ClInclude Include="MockDatabase.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="TestUtil.h" />

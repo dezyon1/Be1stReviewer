@@ -40,8 +40,7 @@ public:
 	virtual string run(IDatabase<Employee>& database) override
 	{
 		Employee employee = Employee(employeeNum, name, cl, phoneNum, birthday, certi);
-		database.add(employee);
-		return string("");
+		return database.add(employee) ? "" : "ADD FAIL";
 	};
 
 private:

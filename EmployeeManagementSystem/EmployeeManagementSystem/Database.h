@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include <vector>
 #include <map>
 #include <string>
@@ -10,7 +10,7 @@ using namespace std;
 template <typename record>
 class IDatabase {
 public:
-	virtual void add(record& data) = 0;
+	virtual bool add(record& data) = 0;
 	virtual vector<record> del(string const& column, string const& keyword, string const& option) = 0;
 	virtual vector<record> sch(string const& column, string const& keyword, string const& option) = 0;
 	virtual vector<record> mod(string const& column, string const& keyword, string const& option,
@@ -20,8 +20,16 @@ public:
 template <typename record>
 class VectorDatabase : public IDatabase<record> {
 public:
-	virtual void add(record& data) override {
-		database.push_back(data);
+	virtual bool add(record& data) override {
+		try {
+			database.push_back(data);
+		}
+		catch (const std::bad_alloc&) {
+			cout << "Bad Alloc Exception" << endl;
+			return false;
+		}
+		
+		return true;
 	};
 
 	virtual vector<record> del(string const& column, string const& keyword, string const& option) override {

@@ -1,37 +1,68 @@
 #include "pch.h"
 #include "test.h"
+#include "MockDatabase.h"
 #include "TestUtil.h"
-
 #include "../EmployeeManagementSystem/InputValidation.cpp"
 #include "../EmployeeManagementSystem/OutputValidation.cpp"
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
+#include "../EmployeeManagementSystem/EmployeeManagementSystem.h"
 #include "../EmployeeManagementSystem/Employee.cpp"
 #include "../EmployeeManagementSystem/Employee.h"
 #include "../EmployeeManagementSystem/Database.cpp"
+#include "../EmployeeManagementSystem/Database.h"
 #include "../EmployeeManagementSystem/Common.cpp"
+#include "../EmployeeManagementSystem/Command.h"
 
 using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-/*
 TEST_F(FixtureTestCalculator, SuccessToAdd) {
-	FEATURE("Manage는 Employee에 사원 정보를 추가할 수 있다.");
-	SCENARIO("Employee에 주어진 사원 정보를 저장한다.");
+	string command = "ADD, , , , 15123099, VXIHXOTH JHOP, CL3, 010-3112-2609, 19771211, ADV";
+	AddCommand addCommand(command);
 
-	GIVEN("주어진 사원 정보");
-	// Employee employee(0, NULL, NULL, NULL, NULL, NULL);
+	Employee employee = Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV");
+	EXPECT_CALL(mockDatabase, add(employee)).Times(1).WillOnce(Return(true));
 
-	WHEN("사원 정보가 추가되었을 때");
-
-	THEN("정상적으로 추가가 되어야하고");
-	string sample = "Mock is working";
-	// EXPECT_CALL(manage_, testMock()).Times(1).WillOnce(Return(sample));
-
-	AND("추가된 사원 정보를 확인할 수 있어야 한다.");
-	// EXPECT_EQ("Mock is working", result);
+	string result = addCommand.run(mockDatabase);
+	EXPECT_EQ("", result);
 }
-*/
+
+TEST_F(FixtureTestCalculator, SuccessToDel) {	
+	string command = "DEL, , , ,employeeNum,18115040";
+    DelCommand delCommand(command);
+
+	EXPECT_CALL(mockDatabase, del("employeeNum", "18115040", " ")).Times(1).WillOnce(Return(
+		vector<Employee>{Employee()}
+	));
+
+	string result = delCommand.run(mockDatabase);
+	EXPECT_EQ("DEL,1", result);
+}
+
+TEST_F(FixtureTestCalculator, SuccessToSch) {
+	string command = "SCH, , , ,employeeNum,79110836";
+	SchCommand schCommand(command);
+
+	EXPECT_CALL(mockDatabase, sch("employeeNum", "79110836", " ")).Times(1).WillOnce(Return(
+		vector<Employee>{Employee(), Employee(), Employee(), Employee(), Employee(), Employee()}
+	));
+
+	string result = schCommand.run(mockDatabase);
+	EXPECT_EQ("SCH,6", result);
+}
+
+TEST_F(FixtureTestCalculator, SuccessToMod) {
+	string command = "MOD,-p, , ,name,FB NTAWR,birthday,20050520";
+	ModCommand schCommand(command);
+
+	EXPECT_CALL(mockDatabase, mod("name", "FB NTAWR", " ", "birthday", "20050520")).Times(1).WillOnce(Return(
+		vector<Employee>{Employee("17112609", "FB NTAWR", "CL4", "010-5645-6122", "19861203", "PRO")}
+	));
+
+	string result = schCommand.run(mockDatabase);
+	EXPECT_EQ("MOD,17112609,FB NTAWR,CL4,010-5645-6122,19861203,PRO", result);
+}
 
 TEST(InputValidation, TypeValidation) {
 	EXPECT_EQ(true, isValidBirthday("20120101"));
