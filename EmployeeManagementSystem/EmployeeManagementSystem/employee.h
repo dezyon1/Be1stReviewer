@@ -9,10 +9,8 @@ using namespace std;
 class Employee {
 public:
 	~Employee() {};
-	Employee(string employeeNumber, string name, string cl, string phoneNumber, string birth, string certi) : employeeNumber_(employeeNumber), name_(name), cl_(cl), phoneNumber_(phoneNumber), birth_(birth), certi_(certi) {		
-		vector<string> fullName = splitString(name, ' ');
-		firstName_ = fullName[0];
-		lastName_ = fullName[1];
+	Employee(string employeeNumber, string name, string cl, string phoneNumber, string birth, string certi) : employeeNumber_(employeeNumber), cl_(cl), phoneNumber_(phoneNumber), birth_(birth), certi_(certi) {
+		setName(name);
 	};
 
 	bool isMatch(string const& column, string const& keyword);
@@ -45,6 +43,7 @@ public:
 			certi_;
 	};
 private:
+	void setName(string const &name);
 	string employeeNumber_;
 	string name_;
 	string cl_;
