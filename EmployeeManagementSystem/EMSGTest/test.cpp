@@ -18,11 +18,11 @@ using ::testing::AtLeast;
 using ::testing::Return;
 
 TEST_F(FixtureTestCalculator, SuccessToAdd) {
-	string command = "ADD, , , , 15123099, VXIHXOTH JHOP, CL3, 010-3112-2609, 19771211, ADV";
+	string command = "ADD, , , ,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV";
 	AddCommand addCommand(command);
 
 	Employee employee = Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV");
-	EXPECT_CALL(mockDatabase, add(employee)).Times(1).WillOnce(Return(true));
+	EXPECT_CALL(mockDatabase, add(_)).Times(1).WillOnce(Return(true));
 
 	string result = addCommand.run(mockDatabase);
 	EXPECT_EQ("", result);

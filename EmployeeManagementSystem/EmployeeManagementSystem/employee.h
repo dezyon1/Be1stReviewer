@@ -37,6 +37,15 @@ public:
 		}
 		return str1 < str2;
 	};
+	bool operator==(Employee& e) const {
+		if (employeeNumber_ == e.employeeNumber_) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	};
+
 	string toString() {
 		return employeeNumber_ + "," +
 			name_ + "," +
