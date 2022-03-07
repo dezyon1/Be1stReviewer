@@ -247,6 +247,14 @@ TEST(ResultStrValidation, TestCase1) {
 	EXPECT_EQ("SCH,1", employeeMng.runCommand("SCH, , , ,name,FB NTAWR"));
 }
 
+TEST(ResultStrValidation, ModifyNameTest) {
+	VectorDatabase<Employee> vDB;
+	EmployeeManagementSystem employeeMng(vDB);
+	employeeMng.runCommand("ADD, , , ,21119688,WSICW FJASW,CL4,010-2463-9215,19870613,ADV");
+	employeeMng.runCommand("MOD,-p, , ,name,WSICW FJASW,name,TJENQ VH");
+	EXPECT_EQ("SCH,NONE", employeeMng.runCommand("SCH,-p,-f, ,name,WSICW"));
+}
+
 TEST(DatabaseTest, SimpleTest) {
 	VectorDatabase<Employee> vDatabase;
 	IDatabase<Employee>& iDatabase = vDatabase;
