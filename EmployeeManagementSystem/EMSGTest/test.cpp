@@ -8,6 +8,7 @@
 #include "../EmployeeManagementSystem/Employee.cpp"
 #include "../EmployeeManagementSystem/Employee.h"
 #include "../EmployeeManagementSystem/Database.cpp"
+#include "../EmployeeManagementSystem/Common.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -15,23 +16,22 @@ using ::testing::Return;
 
 /*
 TEST_F(FixtureTestCalculator, SuccessToAdd) {
-	FEATURE("Manage´Â Employee¿¡ »ç¿ø Á¤º¸¸¦ Ãß°¡ÇÒ ¼ö ÀÖ´Ù.");
-	SCENARIO("Employee¿¡ ÁÖ¾îÁø »ç¿ø Á¤º¸¸¦ ÀúÀåÇÑ´Ù.");
+	FEATURE("ManageëŠ” Employeeì— ì‚¬ì› ì •ë³´ë¥¼ ì¶”ê°€í•  ìˆ˜ ìˆë‹¤.");
+	SCENARIO("Employeeì— ì£¼ì–´ì§„ ì‚¬ì› ì •ë³´ë¥¼ ì €ì¥í•œë‹¤.");
 
-	GIVEN("ÁÖ¾îÁø »ç¿ø Á¤º¸");
+	GIVEN("ì£¼ì–´ì§„ ì‚¬ì› ì •ë³´");
 	// Employee employee(0, NULL, NULL, NULL, NULL, NULL);
 
-	WHEN("»ç¿ø Á¤º¸°¡ Ãß°¡µÇ¾úÀ» ¶§");
+	WHEN("ì‚¬ì› ì •ë³´ê°€ ì¶”ê°€ë˜ì—ˆì„ ë•Œ");
 
-	THEN("Á¤»óÀûÀ¸·Î Ãß°¡°¡ µÇ¾î¾ßÇÏ°í");
+	THEN("ì •ìƒì ìœ¼ë¡œ ì¶”ê°€ê°€ ë˜ì–´ì•¼í•˜ê³ ");
 	string sample = "Mock is working";
 	// EXPECT_CALL(manage_, testMock()).Times(1).WillOnce(Return(sample));
 
-	AND("Ãß°¡µÈ »ç¿ø Á¤º¸¸¦ È®ÀÎÇÒ ¼ö ÀÖ¾î¾ß ÇÑ´Ù.");
+	AND("ì¶”ê°€ëœ ì‚¬ì› ì •ë³´ë¥¼ í™•ì¸í•  ìˆ˜ ìˆì–´ì•¼ í•œë‹¤.");
 	// EXPECT_EQ("Mock is working", result);
 }
 */
-
 
 TEST(InputValidation, TypeValidation) {
 	EXPECT_EQ(true, isValidBirthday("20120101"));
@@ -144,6 +144,28 @@ TEST(InputValidation, DelInputValidation) {
 
 TEST(OutputValidation, IsSameAsAnswer) {
 	EXPECT_EQ(true, IsValidOutput());
+}
+
+TEST(EmployeeTest, MatchTest) {
+	Employee e("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV");
+	EXPECT_EQ(true, e.isMatch("name", "JHOP", "-l"));
+	EXPECT_EQ(true, e.isMatch("name", "VXIHXOTH", "-f"));
+	EXPECT_EQ(false, e.isMatch("name", "JHOP", "-f"));
+	EXPECT_EQ(false, e.isMatch("name", "VXIHXOTH", "-l"));
+
+	EXPECT_EQ(true, e.isMatch("phoneNum", "3112", "-m"));
+	EXPECT_EQ(true, e.isMatch("phoneNum", "2609", "-l"));
+	EXPECT_EQ(false, e.isMatch("phoneNum", "3112", "-l"));
+	EXPECT_EQ(false, e.isMatch("phoneNum", "2609", "-m"));
+
+	EXPECT_EQ(true, e.isMatch("birthday", "1977", "-y"));
+	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-y"));
+
+	EXPECT_EQ(false, e.isMatch("birthday", "1977", "-m"));
+	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-d"));
+
+	EXPECT_EQ(true, e.isMatch("birthday", "12", "-m"));
+	EXPECT_EQ(true, e.isMatch("birthday", "11", "-d"));
 }
 
 TEST(ResultStrValidation, TestCase1) {

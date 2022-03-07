@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "Common.h"
 #include "EmployeeManagementSystem.h"
 
 using namespace std;
@@ -8,9 +10,13 @@ class Employee {
 public:
 	~Employee() {};
 	Employee(string employeeNumber, string name, string cl, string phoneNumber, string birth, string certi) : employeeNumber_(employeeNumber), name_(name), cl_(cl), phoneNumber_(phoneNumber), birth_(birth), certi_(certi) {		
+		vector<string> fullName = splitString(name, ' ');
+		firstName_ = fullName[0];
+		lastName_ = fullName[1];
 	};
 
 	bool isMatch(string const& column, string const& keyword);
+	bool isMatch(string const& column, string const& keyword, string const & option);
 	string getValue(string const& column);
 	void setValue(string const& column, string const & value);
 	bool operator<(const Employee& e) {
@@ -45,4 +51,7 @@ private:
 	string phoneNumber_;
 	string birth_;
 	string certi_;
+
+	string firstName_;
+	string lastName_;
 };

@@ -5,16 +5,15 @@ bool IsValidOutput() {
 	ifstream resultFile, answerFile;
 	resultFile.open("../EmployeeManagementSystem/output.txt");
 	answerFile.open("../EmployeeManagementSystem/output_solution.txt");
-	
+
 	if (!resultFile.is_open() || !answerFile.is_open()) {
 		return false;
 	}
 
+	bool ret = true;
+
 	string resultStr, answerStr;
-	while (getline(resultFile, resultStr)) {
-		if (!getline(answerFile, answerStr)) {
-			return false;
-		}
+	while (getline(resultFile, resultStr) && getline(answerFile, answerStr)) {
 
 		if (resultStr != answerStr) {
 			cout << endl;
@@ -22,9 +21,14 @@ bool IsValidOutput() {
 			cout << "Result:: " << resultStr << endl;
 			cout << "Expected Result:: " << answerStr << endl;
 			cout << endl;
-			return false;
+
+			ret = false;
+			break;
 		}
 	}
 
-	return true;
+	resultFile.close();
+	answerFile.close();
+
+	return ret;
 }
