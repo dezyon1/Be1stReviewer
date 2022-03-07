@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <regex>
-#include <sstream>
+#include "Common.h"
 #include "InputValidation.h"
 
 using std::vector;
@@ -104,17 +104,6 @@ bool isValidAddInput(const vector<string> & input_tokens) {
 	return true;
 }
 
-vector<string> split(string input, char delimiter) {
-	vector<string> answer;
-	std::stringstream ss(input);
-	string temp;
-
-	while (getline(ss, temp, delimiter)) {
-		answer.push_back(temp);
-	}
-
-	return answer;
-}
 
 bool optionValidation(const vector<string>& input_tokens) {
 	const string & option1 = input_tokens[1];
@@ -237,7 +226,7 @@ bool isValidModInput(const vector<string>& input_tokens) {
 
 
 bool isValidInput(std::string input) {
-	vector<string> input_tokens = split(input, ',');
+	vector<string> input_tokens = splitString(input, ',');
 
 	if (input_tokens[0] == "ADD")
 		return isValidAddInput(input_tokens);

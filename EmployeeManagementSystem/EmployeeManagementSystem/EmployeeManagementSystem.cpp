@@ -10,7 +10,7 @@ using namespace std;
 string EmployeeManagementSystem::runCommand(string command)
 {
 	if (!isValidInput(command))
-		throw invalid_argument("ÀÔ·Â Çü½Ä¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù: " + command);
+		throw invalid_argument("ì…ë ¥ í˜•ì‹ì— ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤: " + command);
 
 	FactoryCommand factoryCommand;
 	iCommand* pICommand = factoryCommand.createCommand(command);

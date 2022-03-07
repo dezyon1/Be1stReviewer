@@ -7,6 +7,7 @@
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
 #include "../EmployeeManagementSystem/Employee.cpp"
 #include "../EmployeeManagementSystem/Employee.h"
+#include "../EmployeeManagementSystem/Common.cpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -30,7 +31,6 @@ TEST_F(FixtureTestCalculator, SuccessToAdd) {
 	// EXPECT_EQ("Mock is working", result);
 }
 */
-
 
 TEST(InputValidation, TypeValidation) {
 	EXPECT_EQ(true, isValidBirthday("20120101"));
@@ -143,6 +143,28 @@ TEST(InputValidation, DelInputValidation) {
 
 TEST(OutputValidation, IsSameAsAnswer) {
 	EXPECT_EQ(true, IsValidOutput());
+}
+
+TEST(EmployeeTest, MatchTest) {
+	Employee e("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV");
+	EXPECT_EQ(true, e.isMatch("name", "JHOP", "-l"));
+	EXPECT_EQ(true, e.isMatch("name", "VXIHXOTH", "-f"));
+	EXPECT_EQ(false, e.isMatch("name", "JHOP", "-f"));
+	EXPECT_EQ(false, e.isMatch("name", "VXIHXOTH", "-l"));
+
+	EXPECT_EQ(true, e.isMatch("phoneNum", "3112", "-m"));
+	EXPECT_EQ(true, e.isMatch("phoneNum", "2609", "-l"));
+	EXPECT_EQ(false, e.isMatch("phoneNum", "3112", "-l"));
+	EXPECT_EQ(false, e.isMatch("phoneNum", "2609", "-m"));
+
+	EXPECT_EQ(true, e.isMatch("birthday", "1977", "-y"));
+	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-y"));
+
+	EXPECT_EQ(false, e.isMatch("birthday", "1977", "-m"));
+	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-d"));
+
+	EXPECT_EQ(true, e.isMatch("birthday", "12", "-m"));
+	EXPECT_EQ(true, e.isMatch("birthday", "11", "-d"));
 }
 
 TEST(ResultStrValidation, TestCase1) {
