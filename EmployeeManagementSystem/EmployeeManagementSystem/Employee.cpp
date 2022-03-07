@@ -82,12 +82,19 @@ string Employee::getValue(string const& column)
 	return string();
 }
 
+void Employee::setName(string const& name) {
+	vector<string> fullName = splitString(name, ' ');
+	name_ = name;
+	firstName_ = fullName[0];
+	lastName_ = fullName[1];
+}
+
 void Employee::setValue(string const& column, string const & value)
 {
 	if (column == "employeeNum")
 		employeeNumber_ = value;
 	if (column == "name")
-		name_ = value;
+		setName(value);
 	if (column == "cl")
 		cl_ = value;
 	if (column == "phoneNum")

@@ -26,13 +26,18 @@ int main(int argc, char** argv)
 	VectorDatabase<Employee> vDB;
 	EmployeeManagementSystem* employeeManagementSystem = new EmployeeManagementSystem(vDB);
 
-	remove("output.txt");
+	if (argc != 3) {
+		cout << "EmployeeManagementSystem.exe input_filename.txt output_filename.txt" << endl;
+		exit(1);
+	}
+
+	remove(argv[2]);
 
 	ifstream inputFile;
 	ofstream outputFile;
 
-	inputFile.open("input.txt");
-	outputFile.open("output.txt");
+	inputFile.open(argv[1]);
+	outputFile.open(argv[2]);
 
 	if (inputFile.is_open() == false)
 	{
