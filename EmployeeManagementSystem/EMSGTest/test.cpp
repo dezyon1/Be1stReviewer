@@ -7,6 +7,7 @@
 #include "../EmployeeManagementSystem/EmployeeManagementSystem.cpp"
 #include "../EmployeeManagementSystem/Employee.cpp"
 #include "../EmployeeManagementSystem/Employee.h"
+#include "../EmployeeManagementSystem/Database.cpp"
 #include "../EmployeeManagementSystem/Common.cpp"
 
 using ::testing::_;
@@ -15,19 +16,19 @@ using ::testing::Return;
 
 /*
 TEST_F(FixtureTestCalculator, SuccessToAdd) {
-	FEATURE("Manage´Â Employee¿¡ »ç¿ø Á¤º¸¸¦ Ãß°¡ÇÒ ¼ö ÀÖ´Ù.");
-	SCENARIO("Employee¿¡ ÁÖ¾îÁø »ç¿ø Á¤º¸¸¦ ÀúÀåÇÑ´Ù.");
+	FEATURE("ManageëŠ” Employeeì— ì‚¬ì› ì •ë³´ë¥¼ ì¶”ê°€í•  ìˆ˜ ìˆë‹¤.");
+	SCENARIO("Employeeì— ì£¼ì–´ì§„ ì‚¬ì› ì •ë³´ë¥¼ ì €ì¥í•œë‹¤.");
 
-	GIVEN("ÁÖ¾îÁø »ç¿ø Á¤º¸");
+	GIVEN("ì£¼ì–´ì§„ ì‚¬ì› ì •ë³´");
 	// Employee employee(0, NULL, NULL, NULL, NULL, NULL);
 
-	WHEN("»ç¿ø Á¤º¸°¡ Ãß°¡µÇ¾úÀ» ¶§");
+	WHEN("ì‚¬ì› ì •ë³´ê°€ ì¶”ê°€ë˜ì—ˆì„ ë•Œ");
 
-	THEN("Á¤»óÀûÀ¸·Î Ãß°¡°¡ µÇ¾î¾ßÇÏ°í");
+	THEN("ì •ìƒì ìœ¼ë¡œ ì¶”ê°€ê°€ ë˜ì–´ì•¼í•˜ê³ ");
 	string sample = "Mock is working";
 	// EXPECT_CALL(manage_, testMock()).Times(1).WillOnce(Return(sample));
 
-	AND("Ãß°¡µÈ »ç¿ø Á¤º¸¸¦ È®ÀÎÇÒ ¼ö ÀÖ¾î¾ß ÇÑ´Ù.");
+	AND("ì¶”ê°€ëœ ì‚¬ì› ì •ë³´ë¥¼ í™•ì¸í•  ìˆ˜ ìˆì–´ì•¼ í•œë‹¤.");
 	// EXPECT_EQ("Mock is working", result);
 }
 */
@@ -244,6 +245,38 @@ TEST(ResultStrValidation, TestCase1) {
 	EXPECT_EQ("MOD,1", employeeMng.runCommand("MOD, , , ,name,VCUHLE HMU,birthday,19910808"));
 
 	EXPECT_EQ("SCH,1", employeeMng.runCommand("SCH, , , ,name,FB NTAWR"));
+}
+
+TEST(DatabaseTest, SimpleTest) {
+	VectorDatabase<Employee> vDatabase;
+	IDatabase<Employee>& iDatabase = vDatabase;
+
+	vector<Employee> result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(0, result.size());
+
+	iDatabase.add(Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV"));
+	result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("cl", "CL3");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("phoneNum", "010-3112-2609");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("birthday", "19771211");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("certi", "ADV");
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.mod("employeeNum", "15123099", "name", "KANG");
+	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	EXPECT_EQ(0, result.size());
+	result = iDatabase.sch("name", "KANG");
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.del("employeeNum", "15123099");
+	result = iDatabase.sch("employeeNum", "15123099");
+	EXPECT_EQ(0, result.size());
 }
 
 TEST(TestCaseName, TestName) {
