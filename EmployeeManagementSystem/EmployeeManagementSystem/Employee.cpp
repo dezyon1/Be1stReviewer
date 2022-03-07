@@ -95,15 +95,9 @@ void Employee::setValue(string const& column, string const & value)
 {
 	if (column == employeeNumStr)
 		employeeNumber_ = value;
-<<<<<<< HEAD
 	if (column == nameStr)
-		name_ = value;
-	if (column == clStr)
-=======
-	if (column == "name")
 		setName(value);
-	if (column == "cl")
->>>>>>> master
+	if (column == clStr)
 		cl_ = value;
 	if (column == phoneNumStr)
 		phoneNumber_ = value;
