@@ -70,7 +70,7 @@ protected:
 		if (result.size() == 0)
 			return string(command + ",NONE");
 
-		if (option == pOptionStr) {
+		if (option == P_OPT_STR) {
 			string str;
 			sort(result.begin(), result.end());
 			for (int i = 0; i < 5 && i < result.size(); i++) {
@@ -97,7 +97,7 @@ public:
 	string run(IDatabase<Employee>& database) override
 	{
 		vector<Employee> result = database.del(searchColumn, searchValue, option2);
-		return resultToString(result, option1, delCmdStr);
+		return resultToString(result, option1, DEL_CMD_STR);
 	};
 };
 
@@ -109,7 +109,7 @@ public:
 	{
 		vector<Employee> result = database.sch(searchColumn, searchValue, option2);
 
-		return resultToString(result, option1, schCmdStr);
+		return resultToString(result, option1, SCH_CMD_STR);
 	};
 };
 
@@ -123,7 +123,7 @@ public:
 	string run(IDatabase<Employee>& database) override
 	{
 		vector<Employee> result = database.mod(searchColumn, searchValue, option2, modColumn, modValue);
-		return resultToString(result, option1, modCmdStr);
+		return resultToString(result, option1, MOD_CMD_STR);
 	};
 private:
 	string modColumn;
@@ -139,19 +139,19 @@ class FactoryCommand : public IFactoryCommand {
 public:
 	iCommand* createCommand(string command) override {
 
-		if (command.find(addCmdStr) == 0) {
+		if (command.find(ADD_CMD_STR) == 0) {
 			return new AddCommand(command);
 		}
 
-		if (command.find(delCmdStr) == 0) {
+		if (command.find(DEL_CMD_STR) == 0) {
 			return new DelCommand(command);
 		}
 
-		if (command.find(schCmdStr) == 0) {
+		if (command.find(SCH_CMD_STR) == 0) {
 			return new SchCommand(command);
 		}
 
-		if (command.find(modCmdStr) == 0) {
+		if (command.find(MOD_CMD_STR) == 0) {
 			return new ModCommand(command);
 		}
 

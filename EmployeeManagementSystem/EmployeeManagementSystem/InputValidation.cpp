@@ -95,9 +95,9 @@ bool isValidBirthday(const string& birthday) {
 bool isValidAddInput(const vector<string> & input_tokens) {
 	if (input_tokens.size() != 10)
 		return false;
-	if (input_tokens[0].compare(addCmdStr))
+	if (input_tokens[0].compare(ADD_CMD_STR))
 		return false;
-	if (input_tokens[1].compare(emptyOptionStr) || input_tokens[2].compare(emptyOptionStr) || input_tokens[3].compare(emptyOptionStr))
+	if (input_tokens[1].compare(EMPTY_OPT_STR) || input_tokens[2].compare(EMPTY_OPT_STR) || input_tokens[3].compare(EMPTY_OPT_STR))
 		return false;
 	if (!isValidEmployeeNum(input_tokens[4]) || !isValidName(input_tokens[5]) || !isValidCL(input_tokens[6]) || !isValidPhoneNum(input_tokens[7])
 		|| !isValidBirthday(input_tokens[8]) || !isValidCerti(input_tokens[9]))
@@ -110,33 +110,33 @@ bool optionValidation(const vector<string>& input_tokens) {
 	const string & option1 = input_tokens[1];
 	const string& option2 = input_tokens[2];
 	const string& column_name = input_tokens[4];
-	if (option1 != emptyOptionStr && option1 != pOptionStr)
+	if (option1 != EMPTY_OPT_STR && option1 != P_OPT_STR)
 		return false;
 	
-	if (column_name == clStr || column_name == employeeNumStr || column_name == certiStr)
-		if (option2 != emptyOptionStr)
+	if (column_name == CL_STR || column_name == EMPLOYEE_NUM_STR || column_name == CERTI_STR)
+		if (option2 != EMPTY_OPT_STR)
 			return false;
 
-	if (column_name == birthStr)
-		if (option2 != emptyOptionStr && option2 != yOptionStr && option2 != mOptionStr && option2 != dOptionStr)
+	if (column_name == BIRTH_STR)
+		if (option2 != EMPTY_OPT_STR && option2 != Y_OPT_STR && option2 != M_OPT_STR && option2 != D_OPT_STR)
 			return false;
 
-	if (column_name == nameStr)
-		if (option2 != emptyOptionStr && option2 != fOptionStr && option2 != lOptionStr)
+	if (column_name == NAME_STR)
+		if (option2 != EMPTY_OPT_STR && option2 != F_OPT_STR && option2 != L_OPT_STR)
 			return false;
 
-	if (column_name == phoneNumStr)
-		if (option2 != emptyOptionStr && option2 != mOptionStr && option2 != lOptionStr)
+	if (column_name == PHONE_NUM_STR)
+		if (option2 != EMPTY_OPT_STR && option2 != M_OPT_STR && option2 != L_OPT_STR)
 			return false;
 
 	return true;
 }
 
 bool columnValidation(const string& columnName, const string& columnValue, const string & option2) {
-	const string columns[] = { employeeNumStr, nameStr, clStr, phoneNumStr, birthStr, certiStr };
+	const string columns[] = { EMPLOYEE_NUM_STR, NAME_STR, CL_STR, PHONE_NUM_STR, BIRTH_STR, CERTI_STR };
 	bool (*validationFP[6])(const string&) = { isValidEmployeeNum, isValidName, isValidCL, isValidPhoneNum, isValidBirthday, isValidCerti};
 
-	if (option2 == emptyOptionStr)
+	if (option2 == EMPTY_OPT_STR)
 	{
 		for (int i = 0; i < 6; i++)
 			if (columnName == columns[i])
@@ -144,19 +144,19 @@ bool columnValidation(const string& columnName, const string& columnValue, const
 		return false;
 	}
 
-	if (columnName == nameStr) {
+	if (columnName == NAME_STR) {
 		regex re("[A-Z]{1,13}");
 		return regex_match(columnValue, re);
 	}
 
-	if (columnName == phoneNumStr) {
+	if (columnName == PHONE_NUM_STR) {
 		regex re("\\d{4}");
 		return regex_match(columnValue, re);
 	}
 
-	if (columnName == birthStr) {
+	if (columnName == BIRTH_STR) {
 		
-		if (option2 == yOptionStr) {
+		if (option2 == Y_OPT_STR) {
 			regex re("\\d{4}");
 			return regex_match(columnValue, re);
 		}
@@ -171,10 +171,10 @@ bool isValidSchInput(const vector<string>& input_tokens) {
 	if (input_tokens.size() != 6)
 		return false;
 	
-	if (input_tokens[0].compare(schCmdStr))
+	if (input_tokens[0].compare(SCH_CMD_STR))
 		return false;
 	
-	if (input_tokens[3].compare(emptyOptionStr))
+	if (input_tokens[3].compare(EMPTY_OPT_STR))
 		return false;
 
 	if (!optionValidation(input_tokens))
@@ -190,10 +190,10 @@ bool isValidDelInput(const vector<string>& input_tokens) {
 	if (input_tokens.size() != 6)
 		return false;
 
-	if (input_tokens[0].compare(delCmdStr))
+	if (input_tokens[0].compare(DEL_CMD_STR))
 		return false;
 
-	if (input_tokens[3].compare(emptyOptionStr))
+	if (input_tokens[3].compare(EMPTY_OPT_STR))
 		return false;
 
 	if (!optionValidation(input_tokens))
@@ -209,16 +209,16 @@ bool isValidModInput(const vector<string>& input_tokens) {
 	if (input_tokens.size() != 8)
 		return false;
 
-	if (input_tokens[0].compare(modCmdStr))
+	if (input_tokens[0].compare(MOD_CMD_STR))
 		return false;
 
-	if (input_tokens[3].compare(emptyOptionStr))
+	if (input_tokens[3].compare(EMPTY_OPT_STR))
 		return false;
 
 	if (!optionValidation(input_tokens))
 		return false;
 
-	if (!columnValidation(input_tokens[4], input_tokens[5], input_tokens[2]) || !columnValidation(input_tokens[6], input_tokens[7], emptyOptionStr))
+	if (!columnValidation(input_tokens[4], input_tokens[5], input_tokens[2]) || !columnValidation(input_tokens[6], input_tokens[7], EMPTY_OPT_STR))
 		return false;
 
 	return true;
@@ -229,13 +229,13 @@ bool isValidModInput(const vector<string>& input_tokens) {
 bool isValidInput(std::string input) {
 	vector<string> input_tokens = splitString(input, ',');
 
-	if (input_tokens[0] == addCmdStr)
+	if (input_tokens[0] == ADD_CMD_STR)
 		return isValidAddInput(input_tokens);
-	if (input_tokens[0] == delCmdStr)
+	if (input_tokens[0] == DEL_CMD_STR)
 		return isValidDelInput(input_tokens);
-	if (input_tokens[0] == schCmdStr)
+	if (input_tokens[0] == SCH_CMD_STR)
 		return isValidSchInput(input_tokens);
-	if (input_tokens[0] == modCmdStr)
+	if (input_tokens[0] == MOD_CMD_STR)
 		return isValidModInput(input_tokens);
 	return false;
 }

@@ -1,48 +1,49 @@
 #include "Employee.h"
 #include <regex>
 #include <sstream>
+#include "Common.h"
 
 using namespace StringValue;
 
 bool Employee::isMatch(string const& column, string const& keyword) {
-	if (column == employeeNumStr)
+	if (column == EMPLOYEE_NUM_STR)
 		return !keyword.compare(employeeNumber_);
 
-	if (column == nameStr)
+	if (column == NAME_STR)
 		return !keyword.compare(name_);
 
-	if (column == clStr)
+	if (column == CL_STR)
 		return !keyword.compare(cl_);
 	
-	if (column == phoneNumStr)
+	if (column == PHONE_NUM_STR)
 		return !keyword.compare(phoneNumber_);
 
-	if (column == birthStr)
+	if (column == BIRTH_STR)
 		return !keyword.compare(birth_);
 
-	if (column == certiStr)
+	if (column == CERTI_STR)
 		return !keyword.compare(certi_);
 
 	return false;
 }
 
 bool Employee::isMatch(string const& column, string const& keyword, string const & option) {
-	if (option == emptyOptionStr || column == employeeNumStr || column == clStr || column == certiStr) {
+	if (option == EMPTY_OPT_STR || column == EMPLOYEE_NUM_STR || column == CL_STR || column == CERTI_STR) {
 		return isMatch(column, keyword);
 	}
-	if (column == nameStr) {
-		if (option == fOptionStr)
+	if (column == NAME_STR) {
+		if (option == F_OPT_STR)
 			return !keyword.compare(firstName_);
-		if (option == lOptionStr)
+		if (option == L_OPT_STR)
 			return !keyword.compare(lastName_);
 		return false;
 	}
 	
-	if (column == phoneNumStr) {
+	if (column == PHONE_NUM_STR) {
 		std::regex* re;
-		if (option == mOptionStr)
+		if (option == M_OPT_STR)
 			re = new std::regex("010-" + keyword + "-\\d{4}");
-		else if (option == lOptionStr)
+		else if (option == L_OPT_STR)
 			re = new std::regex("010-\\d{4}-" + keyword);
 		else
 			return false;
@@ -50,13 +51,13 @@ bool Employee::isMatch(string const& column, string const& keyword, string const
 		delete re;
 		return result;
 	}
-	if (column == birthStr) {
+	if (column == BIRTH_STR) {
 		std::regex* re;
-		if (option == yOptionStr)
+		if (option == Y_OPT_STR)
 			re = new std::regex(keyword + "\\d{4}");
-		else if (option == mOptionStr)
+		else if (option == M_OPT_STR)
 			re = new std::regex("\\d{4}" + keyword + "\\d{2}");
-		else if (option == dOptionStr)
+		else if (option == D_OPT_STR)
 			re = new std::regex("\\d{6}" + keyword);
 		else
 			return false;
@@ -69,17 +70,17 @@ bool Employee::isMatch(string const& column, string const& keyword, string const
 
 string Employee::getValue(string const& column)
 {
-	if (column == employeeNumStr)
+	if (column == EMPLOYEE_NUM_STR)
 		return employeeNumber_;
-	if (column == nameStr)
+	if (column == NAME_STR)
 		return name_;
-	if (column == clStr)
+	if (column == CL_STR)
 		return cl_;
-	if (column == phoneNumStr)
+	if (column == PHONE_NUM_STR)
 		return phoneNumber_;
-	if (column == birthStr)
+	if (column == BIRTH_STR)
 		return birth_;
-	if (column == certiStr)
+	if (column == CERTI_STR)
 		return certi_;
 	return string();
 }
@@ -93,17 +94,17 @@ void Employee::setName(string const& name) {
 
 void Employee::setValue(string const& column, string const & value)
 {
-	if (column == employeeNumStr)
+	if (column == EMPLOYEE_NUM_STR)
 		employeeNumber_ = value;
-	if (column == nameStr)
+	if (column == NAME_STR)
 		setName(value);
-	if (column == clStr)
+	if (column == CL_STR)
 		cl_ = value;
-	if (column == phoneNumStr)
+	if (column == PHONE_NUM_STR)
 		phoneNumber_ = value;
-	if (column == birthStr)
+	if (column == BIRTH_STR)
 		birth_ = value;
-	if (column == certiStr)
+	if (column == CERTI_STR)
 		certi_ = value;
 	
 }
