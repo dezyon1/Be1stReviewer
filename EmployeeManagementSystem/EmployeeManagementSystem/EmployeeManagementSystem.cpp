@@ -12,10 +12,10 @@ string EmployeeManagementSystem::runCommand(string command)
 	if (!isValidInput(command))
 		throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
 
-	FactoryCommand factoryCommand;
+	CommandFactory commandFactory;
 	iCommand* pICommand;
 	try {
-		pICommand = factoryCommand.createCommand(command);
+		pICommand = commandFactory.createCommand(command);
 		if (!pICommand)
 			throw exception("객체 생성 실패");
 	}

@@ -130,12 +130,12 @@ private:
 	string modValue;
 };
 
-class IFactoryCommand {
+class ICommandFactory {
 public:
 	virtual iCommand* createCommand(string command) = 0;
 };
 
-class FactoryCommand : public IFactoryCommand {
+class CommandFactory : public ICommandFactory {
 public:
 	iCommand* createCommand(string command) override {
 
