@@ -251,31 +251,47 @@ TEST(DatabaseTest, SimpleTest) {
 	VectorDatabase<Employee> vDatabase;
 	IDatabase<Employee>& iDatabase = vDatabase;
 
-	vector<Employee> result = iDatabase.sch("employeeNum", "15123099");
+	vector<Employee> result = iDatabase.sch("employeeNum", "15123099", " ");
 	EXPECT_EQ(0, result.size());
 
 	iDatabase.add(Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV"));
-	result = iDatabase.sch("employeeNum", "15123099");
+	
+	result = iDatabase.sch("employeeNum", "15123099", " ");
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	result = iDatabase.sch("name", "VXIHXOTH JHOP", " ");
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("cl", "CL3");
+	result = iDatabase.sch("cl", "CL3", " ");
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("phoneNum", "010-3112-2609");
+	result = iDatabase.sch("phoneNum", "010-3112-2609", " ");
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("birthday", "19771211");
+	result = iDatabase.sch("birthday", "19771211", " ");
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("certi", "ADV");
+	result = iDatabase.sch("certi", "ADV", " ");
 	EXPECT_EQ(1, result.size());
 
-	iDatabase.mod("employeeNum", "15123099", "name", "KANG");
-	result = iDatabase.sch("name", "VXIHXOTH JHOP");
+	result = iDatabase.sch("name", "VXIHXOTH", "-f");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("name", "JHOP", "-l");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("phoneNum", "3112", "-m");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("phoneNum", "2609", "-l");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("birthday", "1977", "-y");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("birthday", "12", "-m");
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch("birthday", "11", "-d");
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.mod("employeeNum", "15123099"," ", "name", "KA NG");
+	result = iDatabase.sch("name", "VXIHXOTH JHOP", " ");
 	EXPECT_EQ(0, result.size());
-	result = iDatabase.sch("name", "KANG");
+	result = iDatabase.sch("name", "KA NG", " ");
 	EXPECT_EQ(1, result.size());
 
-	iDatabase.del("employeeNum", "15123099");
-	result = iDatabase.sch("employeeNum", "15123099");
+	iDatabase.del("employeeNum", "15123099", " ");
+	result = iDatabase.sch("employeeNum", "15123099", " ");
 	EXPECT_EQ(0, result.size());
 }
 
