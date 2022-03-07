@@ -96,7 +96,7 @@ public:
 	};
 	string run(IDatabase<Employee>& database) override
 	{
-		vector<Employee> result = database.del(searchColumn, searchValue);
+		vector<Employee> result = database.del(searchColumn, searchValue, option2);
 		return resultToString(result, option1, "DEL");
 	};
 };
@@ -107,7 +107,7 @@ public:
 	};
 	string run(IDatabase<Employee>& database) override
 	{
-		vector<Employee> result = database.sch(searchColumn, searchValue);
+		vector<Employee> result = database.sch(searchColumn, searchValue, option2);
 
 		return resultToString(result, option1, "SCH");
 	};
@@ -122,7 +122,7 @@ public:
 	
 	string run(IDatabase<Employee>& database) override
 	{
-		vector<Employee> result = database.mod(searchColumn, searchValue, modColumn, modValue);
+		vector<Employee> result = database.mod(searchColumn, searchValue, option2, modColumn, modValue);
 		return resultToString(result, option1, "MOD");
 	};
 private:
