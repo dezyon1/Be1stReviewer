@@ -155,6 +155,6 @@ public:
 			return new ModCommand(command);
 		}
 
-		throw exception("객체를 생성할 수 없습니다");
+		throw invalid_argument("객체를 생성할 수 없습니다");
 	}
 };
