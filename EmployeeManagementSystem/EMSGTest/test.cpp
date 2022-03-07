@@ -148,24 +148,24 @@ TEST(OutputValidation, IsSameAsAnswer) {
 
 TEST(EmployeeTest, MatchTest) {
 	Employee e("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV");
-	EXPECT_EQ(true, e.isMatch("name", "JHOP", "-l"));
-	EXPECT_EQ(true, e.isMatch("name", "VXIHXOTH", "-f"));
-	EXPECT_EQ(false, e.isMatch("name", "JHOP", "-f"));
-	EXPECT_EQ(false, e.isMatch("name", "VXIHXOTH", "-l"));
+	EXPECT_EQ(true, e.isMatch(nameStr, "JHOP", lOptionStr));
+	EXPECT_EQ(true, e.isMatch(nameStr, "VXIHXOTH", fOptionStr));
+	EXPECT_EQ(false, e.isMatch(nameStr, "JHOP", fOptionStr));
+	EXPECT_EQ(false, e.isMatch(nameStr, "VXIHXOTH", lOptionStr));
 
-	EXPECT_EQ(true, e.isMatch("phoneNum", "3112", "-m"));
-	EXPECT_EQ(true, e.isMatch("phoneNum", "2609", "-l"));
-	EXPECT_EQ(false, e.isMatch("phoneNum", "3112", "-l"));
-	EXPECT_EQ(false, e.isMatch("phoneNum", "2609", "-m"));
+	EXPECT_EQ(true, e.isMatch(phoneNumStr, "3112", mOptionStr));
+	EXPECT_EQ(true, e.isMatch(phoneNumStr, "2609", lOptionStr));
+	EXPECT_EQ(false, e.isMatch(phoneNumStr, "3112", lOptionStr));
+	EXPECT_EQ(false, e.isMatch(phoneNumStr, "2609", mOptionStr));
 
-	EXPECT_EQ(true, e.isMatch("birthday", "1977", "-y"));
-	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-y"));
+	EXPECT_EQ(true, e.isMatch(birthStr, "1977", yOptionStr));
+	EXPECT_EQ(false, e.isMatch(birthStr, "1978", yOptionStr));
 
-	EXPECT_EQ(false, e.isMatch("birthday", "1977", "-m"));
-	EXPECT_EQ(false, e.isMatch("birthday", "1978", "-d"));
+	EXPECT_EQ(false, e.isMatch(birthStr, "1977", mOptionStr));
+	EXPECT_EQ(false, e.isMatch(birthStr, "1978", dOptionStr));
 
-	EXPECT_EQ(true, e.isMatch("birthday", "12", "-m"));
-	EXPECT_EQ(true, e.isMatch("birthday", "11", "-d"));
+	EXPECT_EQ(true, e.isMatch(birthStr, "12", mOptionStr));
+	EXPECT_EQ(true, e.isMatch(birthStr, "11", dOptionStr));
 }
 
 TEST(ResultStrValidation, TestCase1) {
@@ -260,47 +260,47 @@ TEST(DatabaseTest, SimpleTest) {
 	VectorDatabase<Employee> vDatabase;
 	IDatabase<Employee>& iDatabase = vDatabase;
 
-	vector<Employee> result = iDatabase.sch("employeeNum", "15123099", " ");
+	vector<Employee> result = iDatabase.sch(employeeNumStr, "15123099", emptyOptionStr);
 	EXPECT_EQ(0, result.size());
 
 	iDatabase.add(Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV"));
 	
-	result = iDatabase.sch("employeeNum", "15123099", " ");
+	result = iDatabase.sch(employeeNumStr, "15123099", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("name", "VXIHXOTH JHOP", " ");
+	result = iDatabase.sch(nameStr, "VXIHXOTH JHOP", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("cl", "CL3", " ");
+	result = iDatabase.sch(clStr, "CL3", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("phoneNum", "010-3112-2609", " ");
+	result = iDatabase.sch(phoneNumStr, "010-3112-2609", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("birthday", "19771211", " ");
+	result = iDatabase.sch(birthStr, "19771211", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("certi", "ADV", " ");
-	EXPECT_EQ(1, result.size());
-
-	result = iDatabase.sch("name", "VXIHXOTH", "-f");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("name", "JHOP", "-l");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("phoneNum", "3112", "-m");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("phoneNum", "2609", "-l");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("birthday", "1977", "-y");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("birthday", "12", "-m");
-	EXPECT_EQ(1, result.size());
-	result = iDatabase.sch("birthday", "11", "-d");
+	result = iDatabase.sch(certiStr, "ADV", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
 
-	iDatabase.mod("employeeNum", "15123099"," ", "name", "KA NG");
-	result = iDatabase.sch("name", "VXIHXOTH JHOP", " ");
+	result = iDatabase.sch(nameStr, "VXIHXOTH", fOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(nameStr, "JHOP", lOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(phoneNumStr, "3112", mOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(phoneNumStr, "2609", lOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(birthStr, "1977", yOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(birthStr, "12", mOptionStr);
+	EXPECT_EQ(1, result.size());
+	result = iDatabase.sch(birthStr, "11", dOptionStr);
+	EXPECT_EQ(1, result.size());
+
+	iDatabase.mod(employeeNumStr, "15123099", emptyOptionStr, nameStr, "KA NG");
+	result = iDatabase.sch(nameStr, "VXIHXOTH JHOP", emptyOptionStr);
 	EXPECT_EQ(0, result.size());
-	result = iDatabase.sch("name", "KA NG", " ");
+	result = iDatabase.sch(nameStr, "KA NG", emptyOptionStr);
 	EXPECT_EQ(1, result.size());
 
-	iDatabase.del("employeeNum", "15123099", " ");
-	result = iDatabase.sch("employeeNum", "15123099", " ");
+	iDatabase.del(employeeNumStr, "15123099", emptyOptionStr);
+	result = iDatabase.sch(employeeNumStr, "15123099", emptyOptionStr);
 	EXPECT_EQ(0, result.size());
 }
 
