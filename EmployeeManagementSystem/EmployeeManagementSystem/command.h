@@ -68,7 +68,7 @@ protected:
 	string resultToString(vector<Employee> result, string option, string command)
 	{
 		if (result.size() == 0)
-			return string("None");
+			return string(command + ",NONE");
 
 		if (option == "-p") {
 			string str;
@@ -81,7 +81,7 @@ protected:
 			return str;
 		}
 
-		return std::to_string(result.size());
+		return command + "," + std::to_string(result.size());
 	}
 
 	string option1;
