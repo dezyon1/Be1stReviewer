@@ -8,6 +8,7 @@
 
 using std::vector;
 using std::string;
+using namespace StringValue;
 
 class iCommand {
 public:
