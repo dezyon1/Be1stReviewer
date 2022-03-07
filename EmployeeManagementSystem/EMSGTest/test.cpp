@@ -253,6 +253,7 @@ TEST(ResultStrValidation, ModifyNameTest) {
 	employeeMng.runCommand("ADD, , , ,21119688,WSICW FJASW,CL4,010-2463-9215,19870613,ADV");
 	employeeMng.runCommand("MOD,-p, , ,name,WSICW FJASW,name,TJENQ VH");
 	EXPECT_EQ("SCH,NONE", employeeMng.runCommand("SCH,-p,-f, ,name,WSICW"));
+	EXPECT_EQ("SCH,21119688,TJENQ VH,CL4,010-2463-9215,19870613,ADV", employeeMng.runCommand("SCH,-p,-f, ,name,TJENQ"));
 }
 
 TEST(DatabaseTest, SimpleTest) {
