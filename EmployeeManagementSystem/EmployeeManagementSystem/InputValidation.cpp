@@ -224,8 +224,6 @@ bool isValidModInput(const vector<string>& input_tokens) {
 	return true;
 }
 
-
-
 bool isValidInput(std::string input) {
 	vector<string> input_tokens = splitString(input, ',');
 

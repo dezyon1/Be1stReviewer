@@ -9,15 +9,13 @@ class IEmployeeManagementSystem
 {
 public:
 	virtual ~IEmployeeManagementSystem() {};
-	virtual void testMock() = 0;
+	virtual string runCommand(string command) = 0;
 };
 
 class EmployeeManagementSystem : public IEmployeeManagementSystem
 {
 public:
-	virtual void testMock() override {};
-
-	string runCommand(string command);
+	string runCommand(string command) override;
 	EmployeeManagementSystem(IDatabase<Employee>& database) : database_(database) {};
 
 private:

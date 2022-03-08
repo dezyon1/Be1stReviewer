@@ -14,7 +14,7 @@ class iCommand {
 public:
 	iCommand(string command) {
 		if (!isValidInput(command))
-			throw std::invalid_argument("ÀÔ·Â Çü½ÄÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + command);
+			throw std::invalid_argument("ì…ë ¥ í˜•ì‹ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + command);
 		std::stringstream ss(command);
 		string temp;
 
@@ -41,8 +41,7 @@ public:
 	virtual string run(IDatabase<Employee>& database) override
 	{
 		Employee employee = Employee(employeeNum, name, cl, phoneNum, birthday, certi);
-		database.add(employee);
-		return string("");
+		return database.add(employee) ? "" : "ADD FAIL";
 	};
 
 private:
@@ -129,33 +128,4 @@ public:
 private:
 	string modColumn;
 	string modValue;
-};
-
-class IFactoryCommand {
-public:
-	virtual iCommand* createCommand(string command) = 0;
-};
-
-class FactoryCommand : public IFactoryCommand {
-public:
-	iCommand* createCommand(string command) override {
-
-		if (command.find(ADD_CMD_STR) == 0) {
-			return new AddCommand(command);
-		}
-
-		if (command.find(DEL_CMD_STR) == 0) {
-			return new DelCommand(command);
-		}
-
-		if (command.find(SCH_CMD_STR) == 0) {
-			return new SchCommand(command);
-		}
-
-		if (command.find(MOD_CMD_STR) == 0) {
-			return new ModCommand(command);
-		}
-
-		throw invalid_argument("°´Ã¼¸¦ »ı¼ºÇÒ ¼ö ¾ø½À´Ï´Ù");
-	}
 };

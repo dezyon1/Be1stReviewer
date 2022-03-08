@@ -92,10 +92,18 @@ void Employee::setName(string const& name) {
 	lastName_ = fullName[1];
 }
 
+void Employee::setEmployeeNumber(string const& employeeNumber) {
+	employeeNumber_ = employeeNumber;
+	employeeID_ = stoi(employeeNumber_);
+	if (employeeNumber[0] < '2') {
+		employeeID_ += 100000000;
+	}
+}
+
 void Employee::setValue(string const& column, string const & value)
 {
 	if (column == EMPLOYEE_NUM_STR)
-		employeeNumber_ = value;
+		setEmployeeNumber(value);
 	if (column == NAME_STR)
 		setName(value);
 	if (column == CL_STR)
