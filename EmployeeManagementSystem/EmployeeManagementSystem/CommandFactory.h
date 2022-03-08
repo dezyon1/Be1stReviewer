@@ -5,12 +5,12 @@
 
 class ICommandFactory {
 public:
-	virtual iCommand* createCommand(string command) = 0;
+	virtual ICommand* createCommand(string command) = 0;
 };
 
 class CommandFactory : public ICommandFactory {
 public:
-	iCommand* createCommand(string command) override {
+	ICommand* createCommand(string command) override {
 		if (!isValidInput(command))
 			throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
 

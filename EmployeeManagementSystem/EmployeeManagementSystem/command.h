@@ -10,9 +10,9 @@ using std::vector;
 using std::string;
 using namespace StringValue;
 
-class iCommand {
+class ICommand {
 public:
-	iCommand(string command) {
+	ICommand(string command) {
 		if (!isValidInput(command))
 			throw std::invalid_argument("입력 형식이 잘못되었습니다. : " + command);
 		std::stringstream ss(command);
@@ -27,9 +27,9 @@ protected:
 	vector<string> commandTokens;
 };
 
-class AddCommand : public iCommand {
+class AddCommand : public ICommand {
 public:
-	AddCommand(string command) :iCommand(command) {
+	AddCommand(string command) :ICommand(command) {
 		employeeNum = commandTokens[4];
 		name = commandTokens[5];
 		cl = commandTokens[6];
@@ -53,9 +53,9 @@ private:
 	string certi;
 };
 
-class iSchCommand : public iCommand{
+class iSchCommand : public ICommand{
 public:
-	iSchCommand(string command) :iCommand(command) {
+	iSchCommand(string command) :ICommand(command) {
 		option1 = commandTokens[1];
 		option2 = commandTokens[2];
 		searchColumn = commandTokens[4];
