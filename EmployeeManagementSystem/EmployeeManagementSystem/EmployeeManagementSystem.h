@@ -19,10 +19,5 @@ public:
 	EmployeeManagementSystem(IDatabase<Employee>& database) : database_(database) {};
 
 private:
-	string add(string command);
-	string del(string command);
-	string mod(string command);
-	string sch(string command);
-	string resultToString(vector<Employee> result, string option, string command);
 	IDatabase<Employee>& database_;
 };

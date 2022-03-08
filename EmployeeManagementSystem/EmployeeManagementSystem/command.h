@@ -8,12 +8,13 @@
 
 using std::vector;
 using std::string;
+using namespace StringValue;
 
 class iCommand {
 public:
 	iCommand(string command) {
 		if (!isValidInput(command))
-			throw std::invalid_argument("ÀÔ·Â Çü½ÄÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + command);
+			throw std::invalid_argument("ì…ë ¥ í˜•ì‹ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + command);
 		std::stringstream ss(command);
 		string temp;
 
@@ -69,7 +70,7 @@ protected:
 		if (result.size() == 0)
 			return string(command + ",NONE");
 
-		if (option == "-p") {
+		if (option == P_OPT_STR) {
 			string str;
 			sort(result.begin(), result.end());
 			for (int i = 0; i < 5 && i < result.size(); i++) {
@@ -96,7 +97,7 @@ public:
 	string run(IDatabase<Employee>& database) override
 	{
 		vector<Employee> result = database.del(searchColumn, searchValue, option2);
-		return resultToString(result, option1, "DEL");
+		return resultToString(result, option1, DEL_CMD_STR);
 	};
 };
 
@@ -108,7 +109,7 @@ public:
 	{
 		vector<Employee> result = database.sch(searchColumn, searchValue, option2);
 
-		return resultToString(result, option1, "SCH");
+		return resultToString(result, option1, SCH_CMD_STR);
 	};
 };
 
@@ -122,7 +123,7 @@ public:
 	string run(IDatabase<Employee>& database) override
 	{
 		vector<Employee> result = database.mod(searchColumn, searchValue, option2, modColumn, modValue);
-		return resultToString(result, option1, "MOD");
+		return resultToString(result, option1, MOD_CMD_STR);
 	};
 private:
 	string modColumn;
