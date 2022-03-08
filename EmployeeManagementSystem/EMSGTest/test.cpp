@@ -33,7 +33,7 @@ TEST_F(FixtureTestCalculator, SuccessToDel) {
     DelCommand delCommand(command);
 
 	EXPECT_CALL(mockDatabase, del("employeeNum", "18115040", " ")).Times(1).WillOnce(Return(
-		vector<Employee>{Employee()}
+		vector<Employee>{Employee("15123099", "VXIHXOTH JHOP", "CL3", "010-3112-2609", "19771211", "ADV")}
 	));
 
 	string result = delCommand.run(mockDatabase);
@@ -45,7 +45,13 @@ TEST_F(FixtureTestCalculator, SuccessToSch) {
 	SchCommand schCommand(command);
 
 	EXPECT_CALL(mockDatabase, sch("employeeNum", "79110836", " ")).Times(1).WillOnce(Return(
-		vector<Employee>{Employee(), Employee(), Employee(), Employee(), Employee(), Employee()}
+		vector<Employee>{
+			Employee("15123099", "FB NTAWR", "CL4", "010-5645-6122", "19861203", "PRO"),
+			Employee("17112609", "TTETHU HBO", "CL3", "010-4581-2050", "20080718", "ADV"),
+			Employee("88114052", "NQ LVARW", "CL4", "010-4528-3059", "19911021", "PRO"),
+			Employee("19129568", "SRERLALH HMEF", "CL2", "010-3091-9521", "19640910", "PRO"),
+			Employee("17111236", "VSID TVO", "CL1", "010-3669-1077", "20120718", "PRO"),
+			Employee("18117906", "TWU QSOLT", "CL4", "010-6672-7186", "20030413", "PRO")}
 	));
 
 	string result = schCommand.run(mockDatabase);
