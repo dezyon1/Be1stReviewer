@@ -95,7 +95,7 @@ void Employee::setName(string const& name) {
 void Employee::setEmployeeNumber(string const& employeeNumber) {
 	employeeNumber_ = employeeNumber;
 	employeeID_ = stoi(employeeNumber_);
-	if (employeeNumber[0] < '2') {
+	if (employeeNumber[0] <= '2') {
 		employeeID_ += 100000000;
 	}
 }
