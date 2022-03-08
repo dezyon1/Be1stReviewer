@@ -14,19 +14,19 @@ public:
 		if (!isValidInput(command))
 			throw invalid_argument("입력 형식에 오류가 있습니다: " + command);
 
-		if (command.find("ADD") == 0) {
+		if (command.find(ADD_CMD_STR) == 0) {
 			return new AddCommand(command);
 		}
 
-		if (command.find("DEL") == 0) {
+		if (command.find(DEL_CMD_STR) == 0) {
 			return new DelCommand(command);
 		}
 
-		if (command.find("SCH") == 0) {
+		if (command.find(SCH_CMD_STR) == 0) {
 			return new SchCommand(command);
 		}
 
-		if (command.find("MOD") == 0) {
+		if (command.find(MOD_CMD_STR) == 0) {
 			return new ModCommand(command);
 		}
 
