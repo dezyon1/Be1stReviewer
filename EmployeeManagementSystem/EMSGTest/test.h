@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pch.h"
-#include "MockManage.h"
+#include "MockDatabase.h"
 
 class FixtureTestCalculator : public ::testing::Test {
 protected:
@@ -13,5 +13,5 @@ protected:
 	}
 
 public:
-	testing::NiceMock<MockManage> manage_;
+	testing::NiceMock<MockDatabase<Employee>> mockDatabase;
 };
