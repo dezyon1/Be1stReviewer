@@ -10,7 +10,7 @@ using namespace std;
 string EmployeeManagementSystem::runCommand(string command)
 {
 	CommandFactory commandFactory;
-	iCommand* pICommand;
+	ICommand* pICommand;
 	try {
 		pICommand = commandFactory.createCommand(command);
 		if (!pICommand)
